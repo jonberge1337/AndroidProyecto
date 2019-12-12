@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ComercialesAPP</string>
+    <string name="navigation_drawer_open">Abrir panel de opciones</string>
+    <string name="navigation_drawer_close">Cerrar panel de opciones</string>
+    <string name="nav_header_title">Usuario</string>
+    <string name="nav_header_subtitle">usuario@empresa.com</string>
+    <string name="nav_header_desc">Cabecera</string>
+    <string name="action_settings">Opciones</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Delegación</string>
+    <string name="menu_slideshow">Partners</string>
+    <string name="menu_tools">Pedidos</string>
+    <string name="menu_share">Agenda</string>
+    <string name="title_activity_delegacion">Mapa</string>
+</resources>
