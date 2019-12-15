@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import com.example.comercialesapp.R;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private Button boton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,14 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        boton = root.findViewById(R.id.btnEnseinar);
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "prueba", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return root;
     }
 }
