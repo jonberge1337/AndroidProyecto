@@ -30,9 +30,6 @@
             android:value="AIzaSyCo8AFSFhHfY0v3v1eGqaBZCn8556lJDq8" />
 
         <activity
-            android:name=".Delegacion"
-            android:label="@string/title_activity_delegacion"></activity>
-        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">

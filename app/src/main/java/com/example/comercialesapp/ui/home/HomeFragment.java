@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
         boton = root.findViewById(R.id.btnEnseinar);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override

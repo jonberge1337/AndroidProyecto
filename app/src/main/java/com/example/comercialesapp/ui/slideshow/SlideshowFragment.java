@@ -1,9 +1,11 @@
 package com.example.comercialesapp.ui.slideshow;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TabHost;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,13 +25,21 @@ public class SlideshowFragment extends Fragment {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        Resources res = getResources();
+        TabHost tabs = root.findViewById(R.id.TabHost);
+        tabs.setup();
+
+        TabHost.TabSpec spec = tabs.newTabSpec("mitab1");
+        spec.setContent(R.id.ACTUALES);
+        spec.setIndicator("TAB1", res.getDrawable(android.R.drawable.ic_btn_speak_now));
+        tabs.addTab(spec);
+
+        spec = tabs.newTabSpec("mitab2");
+        spec.setContent(R.id.NUEVO);
+        spec.setIndicator("TAB2", res.getDrawable(android.R.drawable.ic_dialog_map));
+        tabs.addTab(spec);
+
         return root;
     }
 }
