@@ -40,6 +40,8 @@ public class SlideshowFragment extends Fragment {
         spec.setIndicator("TAB2", res.getDrawable(android.R.drawable.ic_dialog_map));
         tabs.addTab(spec);
 
+
+
         return root;
     }
 }

@@ -13,4 +13,20 @@
     <string name="menu_tools">Pedidos</string>
     <string name="menu_share">Agenda</string>
     <string name="title_activity_delegacion">Mapa</string>
+    <string name="id_cliente">ID DEL CLIENTE:</string>
+    <string name="empresa_cliente">EMPRESA:</string>
+    <string name="nombre_cliente">NOMBRE:</string>
+    <string name="apellido_1_cliente">APELLIDO 1:</string>
+    <string name="apellido_2_cliente">APELLIDO 2:</string>
+    <string name="dni_cliente">DNI:</string>
+    <string name="ciudad_cliente">CIUDAD:</string>
+    <string name="direccion_1_cliente">DIRECCIÓN 1:</string>
+    <string name="direccion_2_cliente">DIRECCIÓN 2:</string>
+    <string name="forma_de_pago_cliente">FORMA DE PAGO:</string>
+    <string name="id_comercial_cliente">ID DEL COMERCIAL:</string>
+    <string name="agregar">Guardar Nuevo Cliente</string>
+
+    <string name="boton_atras"><![CDATA[<<]]></string>
+    <string name="numero_registro">1/X</string>
+    <string name="boton_adelante"><![CDATA[>>]]></string>
 </resources>
