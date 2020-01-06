@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comercialesapp.R;
 
+import java.io.File;
+
 public class SlideshowFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
@@ -41,7 +43,16 @@ public class SlideshowFragment extends Fragment {
         tabs.addTab(spec);
 
 
+        generarXml();
 
         return root;
+    }
+
+    public void generarXml(){
+        ArchivoXML xmlPartner = new ArchivoXML("chargenetic", "Jo",  "Bergerandi", "Loidi",  "424115141L",
+                 "Zarautz", "trinidade",  "cebanc", "c", "4");
+        xmlPartner.generarDOM();
+        xmlPartner.generarDocument();
+        xmlPartner.generarXml();
     }
 }

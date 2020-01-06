@@ -1,10 +1,16 @@
 package com.example.comercialesapp.ui.slideshow;
 
+import android.util.Log;
+
+import com.example.comercialesapp.BuildConfig;
+
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,6 +19,7 @@ import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -28,6 +35,8 @@ public class ArchivoXML {
     private String direccion2;
     private String formapagoID;
     private String comercial;
+    private Document documento = null;
+    private File fichero = new File("/home/jb/prueabloqueseaejejeajadcjsfhafl");
 
     public ArchivoXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
                       String ciudad, String direccion1, String direccion2,
@@ -44,21 +53,31 @@ public class ArchivoXML {
         this.comercial = comercial;
     }
 
-    public boolean existeFichero(){
-        boolean existe = false;
 
-        return existe;
+    public void generarDOM() {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = null;
+        try {
+            builder = factory.newDocumentBuilder();
+            if (!this.fichero.exists()){
+                DOMImplementation dom = builder.getDOMImplementation();
+                documento = dom.createDocument(null, "partners", null);
+            } else {
+                documento = builder.parse(this.fichero);
+            }
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void generarXMl(){
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            DOMImplementation dom = builder.getDOMImplementation();
-            Document documento = dom.createDocument(null, "partners", null);
+    public void generarDocument(){
 
             Element partner = documento.createElement("partner");
-            documento.appendChild(partner);
+            documento.getDocumentElement().appendChild(partner);
 
             Element empresa = documento.createElement("empresa");
             empresa.setTextContent(this.empresa);
@@ -98,19 +117,27 @@ public class ArchivoXML {
 
             Element comercial = documento.createElement("comercial");
             comercial.setTextContent(this.comercial);
-            comercial.appendChild(comercial);
+            partner.appendChild(comercial);
 
+
+    }
+    public void generarXml(){
+
+        try {
             TransformerFactory transFactory = TransformerFactory.newInstance();
             Transformer transformador = transFactory.newTransformer();
-
             Source source = new DOMSource(documento);
-            Result resultado  = new StreamResult(new File("/home/jb/Documentos/android.xml"));
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            Result resultado  = new StreamResult(new File("/data/data/" + BuildConfig.APPLICATION_ID + "/files/"));
+            transformador.transform(source, resultado);
+            Log.e("ha creado", "ha creado");
         } catch (TransformerConfigurationException e) {
+            Log.e("Ha saltado", "1");
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            Log.e("Ha saltado", "2");
             e.printStackTrace();
         }
     }
+
 
 }
