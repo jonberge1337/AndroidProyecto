@@ -29,4 +29,6 @@
     <string name="boton_atras"><![CDATA[<<]]></string>
     <string name="numero_registro">1/X</string>
     <string name="boton_adelante"><![CDATA[>>]]></string>
+    <string name="actuales">Actuales</string>
+    <string name="crear_nuevo_partner">Crear Nuevo Partner</string>
 </resources>
