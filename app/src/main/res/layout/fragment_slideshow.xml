@@ -4,251 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TabHost
-        android:id="@+id/TabHost"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/NUEVO"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:id="@+id/ACTUALES"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:id="@+id/layoutCliente1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtID1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/id_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtEmpresa1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/empresa_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtNombre1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/nombre_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtApellido11"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/apellido_1_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtApellido21"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/apellido_2_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDNI1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/dni_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtCiudad1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/ciudad_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDireccion11"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/direccion_1_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDireccion21"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/direccion_2_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtFP1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/forma_de_pago_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtComercial1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/id_comercial_cliente"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layoutCliente2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtID2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/id_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtEmpresa2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/empresa_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtNombre2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/nombre_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtApellido12"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/apellido_1_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtApellido22"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/apellido_2_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDNI2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/dni_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtCiudad2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/ciudad_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDireccion12"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/direccion_1_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtDireccion22"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/direccion_2_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtFP2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/forma_de_pago_cliente"
-                                    android:textSize="14sp" />
-
-                                <TextView
-                                    android:id="@+id/txtComercial2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/id_comercial_cliente"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/layoutCambiarRegistros"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="horizontal">
-
-                                <Button
-                                    android:id="@+id/btnAtrasCliente"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/boton_atras" />
-
-                                <TextView
-                                    android:id="@+id/lblNumRegistro"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:text="@string/numero_registro"
-                                    android:textSize="18sp" />
-
-                                <Button
-                                    android:id="@+id/btnAdelanteCliente"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/boton_adelante" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </ScrollView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/NUEVO"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
                     <LinearLayout
                         android:id="@+id/layoutClienteIDNuevo"
@@ -500,8 +275,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/agregar" />
                 </LinearLayout>
+            </ScrollView>
 
-            </FrameLayout>
         </LinearLayout>
-    </TabHost>
+
+    </LinearLayout>
 </LinearLayout>
