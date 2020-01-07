@@ -1,24 +1,17 @@
 package com.example.comercialesapp.ui.slideshow;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comercialesapp.R;
 
-import java.io.File;
-
-public class SlideshowFragment extends Fragment {
+public class Partners extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
 
@@ -26,7 +19,7 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View root = inflater.inflate(R.layout.fragment_partners, container, false);
 
         generarXml();
 
