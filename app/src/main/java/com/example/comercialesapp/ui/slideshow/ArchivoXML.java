@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -127,8 +128,10 @@ public class ArchivoXML {
             TransformerFactory transFactory = TransformerFactory.newInstance();
             Transformer transformador = transFactory.newTransformer();
             Source source = new DOMSource(documento);
-            Result resultado  = new StreamResult(new File("/data/data/" + BuildConfig.APPLICATION_ID + "/files/"));
+            Result resultado  = new StreamResult(new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml"));
+            transformador.setOutputProperty(OutputKeys.INDENT, "yes");
             transformador.transform(source, resultado);
+
             Log.e("ha creado", "ha creado");
         } catch (TransformerConfigurationException e) {
             Log.e("Ha saltado", "1");

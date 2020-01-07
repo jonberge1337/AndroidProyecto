@@ -49,7 +49,7 @@ public class SlideshowFragment extends Fragment {
     }
 
     public void generarXml(){
-        ArchivoXML xmlPartner = new ArchivoXML("chargenetic", "Jo",  "Bergerandi", "Loidi",  "424115141L",
+        ArchivoXML xmlPartner = new ArchivoXML("chargenetic", "Jon",  "Bergerandi", "Loidi",  "424115141L",
                  "Zarautz", "trinidade",  "cebanc", "c", "4");
         xmlPartner.generarDOM();
         xmlPartner.generarDocument();
