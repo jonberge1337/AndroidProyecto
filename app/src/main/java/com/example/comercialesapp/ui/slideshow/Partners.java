@@ -13,12 +13,8 @@ import com.example.comercialesapp.R;
 
 public class Partners extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_partners, container, false);
 
         generarXml();
