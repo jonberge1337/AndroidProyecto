@@ -31,4 +31,6 @@
     <string name="boton_adelante"><![CDATA[>>]]></string>
     <string name="actuales">Actuales</string>
     <string name="crear_nuevo_partner">Crear Nuevo Partner</string>
+    <string name="correo">CORREO</string>
+    <string name="telefono">TELEFONO</string>
 </resources>
