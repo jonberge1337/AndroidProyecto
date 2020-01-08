@@ -33,4 +33,6 @@
     <string name="crear_nuevo_partner">Crear Nuevo Partner</string>
     <string name="correo">CORREO</string>
     <string name="telefono">TELEFONO</string>
+
+    <string name="titulo">BIENVENIDO HUMILDE USUARIO</string>
 </resources>
