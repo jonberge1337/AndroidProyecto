@@ -1,4 +1,4 @@
-package com.example.comercialesapp.ui.slideshow;
+package com.example.comercialesapp.ui.partners;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comercialesapp.R;
 

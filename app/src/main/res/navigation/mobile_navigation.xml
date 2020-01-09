@@ -13,26 +13,26 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.comercialesapp.ui.gallery.GalleryFragment"
+        android:name="com.example.comercialesapp.ui.delegacion.GalleryFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_delegacion" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.comercialesapp.ui.slideshow.Partners"
+        android:name="com.example.comercialesapp.ui.partners.Partners"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_partners" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.comercialesapp.ui.tools.ToolsFragment"
+        android:name="com.example.comercialesapp.ui.pedidos.ToolsFragment"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_pedidos" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.example.comercialesapp.ui.share.ShareFragment"
+        android:name="com.example.comercialesapp.ui.agenda.ShareFragment"
         android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_agenda" />
 
 </navigation>

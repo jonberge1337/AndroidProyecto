@@ -1,4 +1,4 @@
-package com.example.comercialesapp.ui.slideshow;
+package com.example.comercialesapp.ui.partners;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
