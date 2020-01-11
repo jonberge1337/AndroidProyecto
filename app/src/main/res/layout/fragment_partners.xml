@@ -3,31 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragmentPartnersID"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="32sp"
-        android:text="@string/actuales" />
-
-    <ListView
-        android:id="@+id/lstPartnersMostrar"
+    <LinearLayout
+        android:id="@+id/invisibleLayout"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnAbrirCreacionPartner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginEnd="20dp"
-        android:text="@string/crear_nuevo_partner" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="32sp"
+            android:text="@string/actuales" />
+
+        <ListView
+            android:id="@+id/lstPartnersMostrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/btnAbrirCreacionPartner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="20dp"
+            android:text="@string/crear_nuevo_partner" />
+    </LinearLayout>
+
 
 
 </LinearLayout>

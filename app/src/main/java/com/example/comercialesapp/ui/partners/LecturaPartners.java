@@ -9,40 +9,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class LecturaPartners  extends FragmentActivity implements View.OnClickListener {
+public class LecturaPartners  extends Fragment implements View.OnClickListener {
     private Button nuevoPartner;
     private ListView listaPartners;
-
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
-    }
+    private View vista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_partners, container, false);
-
+        this.vista = root;
         ArrayList<Partner> partners;
 
         ArchivoXML xml  = new ArchivoXML();
         xml.generarDOM();
         partners = xml.leerPartner();
 
-//        AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
+        AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
         listaPartners = root.findViewById(R.id.lstPartnersMostrar);
-//        listaPartners.setAdapter(adaptador);
+        listaPartners.setAdapter(adaptador);
 
         nuevoPartner = root.findViewById(R.id.btnAbrirCreacionPartner);
         nuevoPartner.setOnClickListener(this);
@@ -52,7 +50,18 @@ public class LecturaPartners  extends FragmentActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-//        Intent intento = new Intent(getActivity(), EscrituraPartners.class);
-//        startActivity(intento);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        Fragment newFragment = new EscrituraPartners();
+        FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+        transaction.replace(R.id.fragmentPartnersID, newFragment);
+        transaction.addToBackStack(null);
+
+// Commit the transaction
+        transaction.commit();
+        LinearLayout layout = this.vista.findViewById(R.id.invisibleLayout);
+        layout.setVisibility(View.GONE);
     }
 }

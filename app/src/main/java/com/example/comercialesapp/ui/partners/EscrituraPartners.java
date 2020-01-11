@@ -27,6 +27,8 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
     private EditText direccion1;
     private EditText direccion2;
     private EditText formapagoID;
+    private EditText correo;
+    private EditText telefono;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
         direccion1 = root.findViewById(R.id.txtDireccion1Nuevo);
         direccion2 = root.findViewById(R.id.txtDireccion2Nuevo);
         formapagoID = root.findViewById(R.id.txtFPNuevo);
+        correo = root.findViewById(R.id.txtCorreo);
+        telefono = root.findViewById(R.id.txtTelefono);
 
         Button crearPartner = root.findViewById(R.id.btnPartnerNuevo); // Creamos aquí implícitamente por recomendación de android-studio
 
@@ -69,7 +73,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
             ArchivoXML xmlPartner = new ArchivoXML(empresa.getText().toString(), nombre.getText().toString(),
                     apellido1.getText().toString(), apellido2.getText().toString(), dni.getText().toString(),
                     ciudad.getText().toString(), direccion1.getText().toString(), direccion2.getText().toString(),
-                    formapagoID.getText().toString(), "1"); // De momento como no tenemos usuarios vamos a dejar el uno en la fase 2 eso hay que cambiar
+                    formapagoID.getText().toString(), correo.getText().toString(), telefono.getText().toString() , "1"); // De momento como no tenemos usuarios vamos a dejar el uno en la fase 2 eso hay que cambiar
             xmlPartner.generarDOM();
             xmlPartner.generarDocument();
             xmlPartner.generarXml();

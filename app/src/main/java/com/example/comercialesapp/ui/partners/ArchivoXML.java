@@ -39,12 +39,14 @@ public class ArchivoXML {
     private String direccion2;
     private String formapagoID;
     private String comercial;
+    private String correo;
+    private String telefono;
     private Document documento = null;
     private File fichero = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
 
     public ArchivoXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
                       String ciudad, String direccion1, String direccion2,
-                      String formapagoID, String comercial) {
+                      String formapagoID,String correo, String telefono, String comercial) {
         this.empresa = empresa;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -55,6 +57,8 @@ public class ArchivoXML {
         this.direccion2 = direccion2;
         this.formapagoID = formapagoID;
         this.comercial = comercial;
+        this.telefono = telefono;
+        this.correo = correo;
     }
 
     public ArchivoXML(){
@@ -119,6 +123,14 @@ public class ArchivoXML {
             formapago.setTextContent(this.formapagoID);
             partner.appendChild(formapago);
 
+            Element correo = documento.createElement("correo");
+            correo.setTextContent(this.correo);
+            partner.appendChild(correo);
+
+            Element telefono = documento.createElement("telefono");
+            telefono.setTextContent(this.telefono);
+            partner.appendChild(telefono);
+
             Element comercial = documento.createElement("comercial");
             comercial.setTextContent(this.comercial);
             partner.appendChild(comercial);
@@ -147,7 +159,7 @@ public class ArchivoXML {
                 correo = e.getElementsByTagName("correo").item(0).getTextContent();
                 telefono = e.getElementsByTagName("telefono").item(0).getTextContent();
 
-                Partner partner = new Partner(nombre + apellido1 + apellido2, correo, telefono);
+                Partner partner = new Partner(nombre + " " + apellido1 + " " + apellido2, correo, telefono);
                 xml.add(partner);
 
             }
