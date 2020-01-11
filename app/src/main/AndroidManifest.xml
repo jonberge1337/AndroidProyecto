@@ -39,6 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.comercialesapp.ui.partners.EscrituraPartners"
+            android:label="@string/app_name"
+            />
+
+
     </application>
 
 </manifest>

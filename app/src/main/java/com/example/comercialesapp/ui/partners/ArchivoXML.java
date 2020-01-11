@@ -7,10 +7,13 @@ import com.example.comercialesapp.BuildConfig;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,7 +40,7 @@ public class ArchivoXML {
     private String formapagoID;
     private String comercial;
     private Document documento = null;
-    private File fichero = new File("/home/jb/prueabloqueseaejejeajadcjsfhafl");
+    private File fichero = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
 
     public ArchivoXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
                       String ciudad, String direccion1, String direccion2,
@@ -54,10 +57,14 @@ public class ArchivoXML {
         this.comercial = comercial;
     }
 
+    public ArchivoXML(){
+
+    }
+
 
     public void generarDOM() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = null;
+        DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
             if (!this.fichero.exists()){
@@ -66,11 +73,7 @@ public class ArchivoXML {
             } else {
                 documento = builder.parse(this.fichero);
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
     }
@@ -122,13 +125,44 @@ public class ArchivoXML {
 
 
     }
+
+    public ArrayList<Partner> leerPartner(){
+        String nombre;
+        String apellido1;
+        String apellido2;
+        String correo;
+        String telefono;
+        ArrayList<Partner> xml = new ArrayList<>();
+
+        NodeList partners = documento.getElementsByTagName("partner");
+
+        for (int i = 0; i < partners.getLength(); i++) {
+            Node nodo = partners.item(i);
+            if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) nodo;
+
+                nombre = e.getElementsByTagName("nombre").item(0).getTextContent();
+                apellido1 = e.getElementsByTagName("apellido1").item(0).getTextContent();
+                apellido2 = e.getElementsByTagName("apellido2").item(0).getTextContent();
+                correo = e.getElementsByTagName("correo").item(0).getTextContent();
+                telefono = e.getElementsByTagName("telefono").item(0).getTextContent();
+
+                Partner partner = new Partner(nombre + apellido1 + apellido2, correo, telefono);
+                xml.add(partner);
+
+            }
+        }
+
+        return xml;
+    }
+
     public void generarXml(){
 
         try {
             TransformerFactory transFactory = TransformerFactory.newInstance();
             Transformer transformador = transFactory.newTransformer();
             Source source = new DOMSource(documento);
-            Result resultado  = new StreamResult(new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml"));
+            Result resultado  = new StreamResult(this.fichero);
             transformador.setOutputProperty(OutputKeys.INDENT, "yes");
             transformador.transform(source, resultado);
 

@@ -12,11 +12,13 @@ import androidx.annotation.Nullable;
 
 import com.example.comercialesapp.R;
 
+import java.util.ArrayList;
+
 public class AdaptadorPartner extends ArrayAdapter{
     private Activity contexto;
-    private Partner[] datos;
+    private ArrayList<Partner> datos;
 
-    public AdaptadorPartner(Activity context, Partner[] datos) {
+    public AdaptadorPartner(Activity context, ArrayList<Partner> datos) {
         super(context, R.layout.listview_partner, datos);
         this.contexto = context;
         this.datos = datos;
@@ -30,7 +32,7 @@ public class AdaptadorPartner extends ArrayAdapter{
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Partner partner;
-        partner = datos[position];
+        partner = datos.get(position);
         View item = null;
 
         if (convertView == null) {
@@ -39,7 +41,7 @@ public class AdaptadorPartner extends ArrayAdapter{
             final ViewHolder holder = new ViewHolder();
             holder.nombre = item.findViewById(R.id.txtNombreMostrar);
             holder.telefono = item.findViewById(R.id.txtTelefonomostrar);
-            holder.correo = item.findViewById(R.id.txtTelefonomostrar);
+            holder.correo = item.findViewById(R.id.txtCorreoMostrar);
             item.setTag(holder);
         } else {
             item = convertView;
