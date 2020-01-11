@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.comercialesapp.R;
 
-public class ToolsFragment extends Fragment {
+public class Catalogo extends Fragment {
 
     private ToolsViewModel toolsViewModel;
 

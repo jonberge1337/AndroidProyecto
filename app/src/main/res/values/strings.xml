@@ -35,4 +35,8 @@
     <string name="titulo">BIENVENIDO HUMILDE USUARIO</string>
     <string name="correoPartners">CORREO:</string>
     <string name="telefonoPartner">TELÉFONO:</string>
+    <string name="articuloPedido">ARTICULO:</string>
+    <string name="precioArticulo">PRECIO:</string>
+    <string name="descuentoArticulo">DESCUENTO(%):</string>
+    <string name="cantidadArticulo">CANTIDAD:</string>
 </resources>
