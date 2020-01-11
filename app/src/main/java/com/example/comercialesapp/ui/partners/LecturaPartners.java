@@ -1,21 +1,15 @@
 package com.example.comercialesapp.ui.partners;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.R;
@@ -24,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class LecturaPartners  extends Fragment implements View.OnClickListener {
-    private Button nuevoPartner;
+    private ImageButton nuevoPartner;
     private ListView listaPartners;
     private View vista;
 
@@ -63,5 +57,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         transaction.commit();
         LinearLayout layout = this.vista.findViewById(R.id.invisibleLayout);
         layout.setVisibility(View.GONE);
+//        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+
     }
 }

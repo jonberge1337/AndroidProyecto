@@ -1,5 +1,6 @@
 package com.example.comercialesapp.ui.partners;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.comercialesapp.MainActivity;
 import com.example.comercialesapp.R;
 
 import java.util.Objects;
@@ -29,10 +32,12 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
     private EditText formapagoID;
     private EditText correo;
     private EditText telefono;
+    private View vista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_crear_partner, container, false);
+        this.vista = root;
 
         empresa = root.findViewById(R.id.txtEmpresaNuevo);
         nombre = root.findViewById(R.id.txtNombreNuevo);
@@ -46,7 +51,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
         correo = root.findViewById(R.id.txtCorreo);
         telefono = root.findViewById(R.id.txtTelefono);
 
-        Button crearPartner = root.findViewById(R.id.btnPartnerNuevo); // Creamos aquí implícitamente por recomendación de android-studio
+        Button crearPartner = root.findViewById(R.id.btnPartnerNuevo);
 
         crearPartner.setOnClickListener(this);
         return root;
@@ -56,7 +61,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
         boolean camposVacios = false;
         Log.e("Metodo", "Entra");
 
-        LinearLayout grupo = Objects.requireNonNull(getView()).findViewById(R.id.layoutCreacionPartners);
+        LinearLayout grupo = Objects.requireNonNull(getView()).findViewById(R.id.layoutCreacionPartnersID);
         for (int i = 0; i < grupo.getChildCount(); i++){
             View texto = grupo.getChildAt(i);
             if (texto instanceof EditText){
@@ -85,5 +90,34 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         generarXml();
+
+//      getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        Fragment newFragment = new LecturaPartners();
+        FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+
+// Replace whatever is in the fragment_container view with this fragment,
+// and add the transaction to the back stack if needed
+        transaction.replace(R.id.layoutCreacionPartnersID, newFragment);
+        transaction.addToBackStack(null);
+
+// Commit the transaction
+        transaction.commit();
+        LinearLayout layout = this.vista.findViewById(R.id.layoutCreacionPartnersID);
+        layout.setVisibility(View.GONE);
+
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+        Intent intencion = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+        startActivity(intencion);
+        Toast.makeText(getActivity().getApplicationContext(), "El partner ha sido añadido al fichero", Toast.LENGTH_SHORT).show();
+//        LinearLayout layout2 = this.vista.findViewById(R.id.fragmentPartnersID);
+
+//        layout2.setVisibility(View.VISIBLE);
+//        Objects.requireNonNull(getView()).findViewById(R.id.invisibleLayout).setVisibility(View.VISIBLE);
+//        String frase = newFragment.getView().toString();
+//        Toast.makeText(getActivity().getApplicationContext(), frase, Toast.LENGTH_SHORT).show();
+//        newFragment.getView().findViewById(R.id.invisibleLayout).setVisibility(View.VISIBLE);
+
+
+
     }
 }

@@ -10,8 +10,7 @@
         android:id="@+id/invisibleLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -21,19 +20,35 @@
             android:textSize="32sp"
             android:text="@string/actuales" />
 
-        <ListView
-            android:id="@+id/lstPartnersMostrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-        <Button
+        <ImageButton
             android:id="@+id/btnAbrirCreacionPartner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="81dp"
+            android:layout_height="81dp"
             android:layout_gravity="right"
             android:layout_marginEnd="20dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ainadir_partner"
             android:text="@string/crear_nuevo_partner" />
+
+        <ScrollView
+            android:fillViewport="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ListView
+                    android:id="@+id/lstPartnersMostrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
 
