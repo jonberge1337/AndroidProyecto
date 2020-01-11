@@ -27,7 +27,7 @@
         android:id="@+id/nav_tools"
         android:name="com.example.comercialesapp.ui.pedidos.Catalogo"
         android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_pedidos" />
+        tools:layout="@layout/fragment_articulo" />
 
     <fragment
         android:id="@+id/nav_share"

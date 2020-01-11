@@ -39,4 +39,6 @@
     <string name="precioArticulo">PRECIO:</string>
     <string name="descuentoArticulo">DESCUENTO(%):</string>
     <string name="cantidadArticulo">CANTIDAD:</string>
+    <string name="catalogoArticulos">CATÁLOGO</string>
+    <string name="confirmar_pedido">CONFIRMAR PEDIDO</string>
 </resources>
