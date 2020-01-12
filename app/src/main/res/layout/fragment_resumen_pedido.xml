@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/layoutResumenPedidoID"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:layout_marginTop="40dp"
+            android:entries="@array/partners"/>
+
+        <ImageButton
+            android:id="@+id/btnResumenPedidoHome"
+            android:layout_height="81dp"
+            android:layout_width="81dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:text="@string/botonPedidoHome"
+            android:layout_weight="1"
+            android:src="@drawable/home"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lstResumenPedido"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

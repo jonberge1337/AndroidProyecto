@@ -39,7 +39,7 @@
         android:layout_weight="1"
         android:layout_marginStart="30dp"
         android:text="@string/articuloPedido" />
-    <EditText
+    <TextView
         android:id="@+id/txtArticuloCatalogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:layout_marginStart="30dp"
         android:text="@string/precioArticulo" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
         android:layout_marginStart="30dp"
         android:text="@string/descuentoArticulo" />
 
-    <EditText
+    <TextView
         android:id="@+id/txtDescuento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

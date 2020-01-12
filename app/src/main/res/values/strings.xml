@@ -40,4 +40,12 @@
     <string name="confirmar_pedido">CONFIRMAR PEDIDO</string>
     <string name="correoDelegacion">MANDAR CORREO A DELEGACIÓN</string>
     <string name="telefonoDelegacion">LLAMAR A DELEGACIÓN</string>
+    <string name="botonPedidoHome">Pedido</string>
+
+    <string-array name="partners">
+        <item>Cebanc</item>
+        <item>Adidas</item>
+        <item>Fsociety</item>
+        <item>Ecorp</item>
+    </string-array>
 </resources>

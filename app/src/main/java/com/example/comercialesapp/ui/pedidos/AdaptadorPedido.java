@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,10 +32,10 @@ public class AdaptadorPedido extends ArrayAdapter {
 
     static class ViewHolder {
         private EditText articulo;
-        private EditText articuloNombre;
+        private TextView articuloNombre;
         private EditText cantdad;
-        private EditText precio;
-        private EditText descuento;
+        private TextView precio;
+        private TextView descuento;
         private ImageView imagen;
     }
 
@@ -46,7 +47,7 @@ public class AdaptadorPedido extends ArrayAdapter {
         if (convertView == null) {
 //            LayoutInflater inflater = contexto.getLayoutInflater();
             LayoutInflater inflater = LayoutInflater.from(contexto);
-            item = inflater.inflate(R.layout.listview_partner, null);
+            item = inflater.inflate(R.layout.listview_articulo, null);
             final ViewHolder holder = new ViewHolder();
             holder.articulo = item.findViewById(R.id.articuloID);
             holder.articuloNombre = item.findViewById(R.id.txtArticuloCatalogo);
@@ -64,7 +65,7 @@ public class AdaptadorPedido extends ArrayAdapter {
         holder.articuloNombre.setText(pedido.getArticuloNombre());
         holder.cantdad.setText(String.valueOf(pedido.getCantidad()));
         holder.precio.setText(String.valueOf(pedido.getPrecio()));
-        holder.descuento.setText(String.valueOf(pedido.getCantidad()));
+        holder.descuento.setText(String.valueOf(pedido.getDescuento()));
         holder.imagen.setImageResource(imagenes[position]);
 
         return item;
