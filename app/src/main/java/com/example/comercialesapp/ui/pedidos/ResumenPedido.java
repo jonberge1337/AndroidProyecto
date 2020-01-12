@@ -26,10 +26,10 @@ public class ResumenPedido extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_resumen_pedido, container, false);
 
-        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), "Hola", Toast.LENGTH_SHORT).show();
         ListView lista = root.findViewById(R.id.lstResumenPedido);
 
-        String value = getArguments().getString("");
+        assert getArguments() != null;
+        String value = getArguments().getString("pedidoGenerado");
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String> (this,android.R.layout.simple_list_item_1, android.R.id., value);
         lista.setAdapter(adapter);
