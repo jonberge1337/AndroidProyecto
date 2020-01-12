@@ -26,9 +26,6 @@
     <string name="id_comercial_cliente">ID DEL COMERCIAL:</string>
     <string name="agregar">Guardar Nuevo Cliente</string>
 
-    <string name="boton_atras"><![CDATA[<<]]></string>
-    <string name="numero_registro">1/X</string>
-    <string name="boton_adelante"><![CDATA[>>]]></string>
     <string name="actuales">Actuales</string>
     <string name="crear_nuevo_partner">Crear Nuevo Partner</string>
 
@@ -41,4 +38,6 @@
     <string name="cantidadArticulo">CANTIDAD:</string>
     <string name="catalogoArticulos">CATÁLOGO</string>
     <string name="confirmar_pedido">CONFIRMAR PEDIDO</string>
+    <string name="correoDelegacion">MANDAR CORREO A DELEGACIÓN</string>
+    <string name="telefonoDelegacion">LLAMAR A DELEGACIÓN</string>
 </resources>
