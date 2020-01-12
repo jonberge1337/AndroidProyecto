@@ -28,7 +28,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class ArchivoXML {
+public class PartnersXML {
     private String empresa;
     private String nombre;
     private String apellido1;
@@ -44,9 +44,9 @@ public class ArchivoXML {
     private Document documento = null;
     private File fichero = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
 
-    public ArchivoXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
-                      String ciudad, String direccion1, String direccion2,
-                      String formapagoID,String correo, String telefono, String comercial) {
+    public PartnersXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
+                       String ciudad, String direccion1, String direccion2,
+                       String formapagoID, String correo, String telefono, String comercial) {
         this.empresa = empresa;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -61,7 +61,7 @@ public class ArchivoXML {
         this.correo = correo;
     }
 
-    public ArchivoXML(){
+    public PartnersXML(){
 
     }
 

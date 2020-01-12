@@ -13,6 +13,7 @@
         android:text="@string/catalogoArticulos"
         />
     <ImageButton
+        android:id="@+id/btnPedidoNuevo"
         android:layout_width="81dp"
         android:layout_height="81dp"
         android:layout_gravity="right"
@@ -35,6 +36,7 @@
             android:orientation="vertical" >
 
             <ListView
+                android:id="@+id/lstArticulos"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

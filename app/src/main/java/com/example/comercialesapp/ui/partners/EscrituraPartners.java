@@ -75,7 +75,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
 
         if (!camposVacios){
             Log.e("prueba", empresa.getText().toString());
-            ArchivoXML xmlPartner = new ArchivoXML(empresa.getText().toString(), nombre.getText().toString(),
+            PartnersXML xmlPartner = new PartnersXML(empresa.getText().toString(), nombre.getText().toString(),
                     apellido1.getText().toString(), apellido2.getText().toString(), dni.getText().toString(),
                     ciudad.getText().toString(), direccion1.getText().toString(), direccion2.getText().toString(),
                     formapagoID.getText().toString(), correo.getText().toString(), telefono.getText().toString() , "1"); // De momento como no tenemos usuarios vamos a dejar el uno en la fase 2 eso hay que cambiar

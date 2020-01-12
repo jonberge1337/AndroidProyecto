@@ -28,7 +28,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         this.vista = root;
         ArrayList<Partner> partners;
 
-        ArchivoXML xml  = new ArchivoXML();
+        PartnersXML xml  = new PartnersXML();
         xml.generarDOM();
         partners = xml.leerPartner();
 
