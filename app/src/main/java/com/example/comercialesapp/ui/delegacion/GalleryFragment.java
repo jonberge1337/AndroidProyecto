@@ -12,12 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.comercialesapp.BuildConfig;
 import com.example.comercialesapp.R;
+import com.example.comercialesapp.ui.partners.PartnersXML;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.io.File;
 
 public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
@@ -70,11 +74,19 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
     public void activarCorreo() {
 
+        File partners = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
+        File pedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedido.xml");
+
         Intent intent = new Intent(Intent.ACTION_SEND);
         //intent.setType("text/xml");
+        if(partners.exists()){
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(partners));
+        }
+        if(pedido.exists()){
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
+        }
         intent.putExtra(Intent.EXTRA_EMAIL, "adchargenetic@gmail.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "");
-        intent.putExtra(Intent.EXTRA_STREAM, "");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Nuevo Partner y/o Pedido");
 
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
