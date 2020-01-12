@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -78,19 +79,30 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
         File pedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedido.xml");
 
         Intent intent = new Intent(Intent.ACTION_SEND);
-        //intent.setType("text/xml");
+        intent.setType("text/xml");
         if(partners.exists()){
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(partners));
         }
         if(pedido.exists()){
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
         }
-        intent.putExtra(Intent.EXTRA_EMAIL, "adchargenetic@gmail.com");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Nuevo Partner y/o Pedido");
+        if(intent.getExtras() != null){
 
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(intent);
+            intent.putExtra(Intent.EXTRA_EMAIL, "adchargenetic@gmail.com");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Nuevo Partner y/o Pedido");
+
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                try {
+                    startActivity(Intent.createChooser(intent, "Enviando Correo..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(getActivity(), "No hay ningún cliente de correo instalado", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }else{
+            Toast.makeText(getActivity(), "No hay Partners o Pedidos nuevos que enviar", Toast.LENGTH_LONG).show();
         }
+
     }
 
     public void activarTelefono() {
