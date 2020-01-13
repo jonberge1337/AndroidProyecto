@@ -66,7 +66,7 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
         mapa = googleMap;
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43.3045627, -2.0191253), 15.0f));
-        mapa.addMarker(new MarkerOptions().title("Delegación chargenetic"));
+//        mapa.addMarker(new MarkerOptions().title("Delegación chargenetic"));
 
     }
 
@@ -81,7 +81,7 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
         } else {
 */
         String dial = "tel:" + "943 123456789";
-        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(dial)));
 //        }
 
     }
