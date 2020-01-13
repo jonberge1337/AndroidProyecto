@@ -28,7 +28,7 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
     private GalleryViewModel galleryViewModel;
     private GoogleMap mapa;
-    private TextView correo;
+//    private TextView correo;
     private TextView telefono;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,17 +41,17 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
         mapFragment.getMapAsync(this);
 
-        correo = root.findViewById(R.id.lblCorreoDelegacion);
+//        correo = root.findViewById(R.id.lblCorreoDelegacion);
         telefono = root.findViewById(R.id.lblTelefonoDelegacion);
 
-        correo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                activarCorreo();
-
-            }
-        });
+//        correo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                activarCorreo();
+//
+//            }
+//        });
 
         telefono.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,37 +73,37 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
-    public void activarCorreo() {
-
-        File partners = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
-        File pedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedido.xml");
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/xml");
-        if(partners.exists()){
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(partners));
-        }
-        if(pedido.exists()){
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
-        }
-        if(intent.getExtras() != null){
-
-            intent.putExtra(Intent.EXTRA_EMAIL, "adchargenetic@gmail.com");
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Nuevo Partner y/o Pedido");
-
-            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                try {
-                    startActivity(Intent.createChooser(intent, "Enviando Correo..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(getActivity(), "No hay ningún cliente de correo instalado", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }else{
-            Toast.makeText(getActivity(), "No hay Partners o Pedidos nuevos que enviar", Toast.LENGTH_LONG).show();
-        }
-
-    }
+//    public void activarCorreo() {
+//
+//        File partners = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
+//        File pedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedido.xml");
+//
+//        Intent intent = new Intent(Intent.ACTION_SEND);
+//        intent.setType("text/xml");
+//        if(partners.exists()){
+//            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(partners));
+//        }
+//        if(pedido.exists()){
+//            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
+//        }
+//        if(intent.getExtras() != null){
+//
+//            intent.putExtra(Intent.EXTRA_EMAIL, "adchargenetic@gmail.com");
+//            intent.putExtra(Intent.EXTRA_SUBJECT, "Nuevo Partner y/o Pedido");
+//
+//            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+//                try {
+//                    startActivity(Intent.createChooser(intent, "Enviando Correo..."));
+//                } catch (android.content.ActivityNotFoundException ex) {
+//                    Toast.makeText(getActivity(), "No hay ningún cliente de correo instalado", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//        }else{
+//            Toast.makeText(getActivity(), "No hay Partners o Pedidos nuevos que enviar", Toast.LENGTH_LONG).show();
+//        }
+//
+//    }
 
     public void activarTelefono() {
 

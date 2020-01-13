@@ -28,11 +28,11 @@ public class ResumenPedido extends Fragment implements View.OnClickListener {
 
         ListView lista = root.findViewById(R.id.lstResumenPedido);
 
-        assert getArguments() != null;
+//        assert getArguments() != null;
         String value = getArguments().getString("pedidoGenerado");
-        ArrayAdapter<String> adapter;
-        adapter = new ArrayAdapter<String> (this,android.R.layout.simple_list_item_1, android.R.id., value);
-        lista.setAdapter(adapter);
+//        ArrayAdapter<String> adapter;
+//        adapter = new ArrayAdapter<String> (this,android.R.layout.simple_list_item_1, android.R.id., value);
+//        lista.setAdapter(adapter);
 
 
 
