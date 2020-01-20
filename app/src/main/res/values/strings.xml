@@ -41,6 +41,9 @@
     <string name="correoDelegacion">MANDAR CORREO A DELEGACIÓN</string>
     <string name="telefonoDelegacion">LLAMAR A DELEGACIÓN</string>
     <string name="botonPedidoHome">Pedido</string>
+    <string name="LoginPasswd">Contraseña</string>
+    <string name="LoginCorreo">Correo</string>
+    <string name="LoginInicioSesion">Iniciar sesión</string>
 
     <string-array name="partners">
         <item>Cebanc</item>
