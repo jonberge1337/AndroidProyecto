@@ -44,9 +44,35 @@ public class TablaSQL extends SQLiteOpenHelper {
                 "CONSTRAINT FK_COMERCIAL FOREIGN KEY (COMERCIALID) REFERENCES COMERCIAL(COMERCIALID)" +
                 ")";
         db.execSQL(sentenciaCrearTabla);
-//        sentenciaCrearTabla = "CREATE TABLE CAB_PEDIDO(" +
-//                ")"
-//        db.execSQL(sentenciaCrearTabla);
+        sentenciaCrearTabla = "CREATE TABLE CAB_PEDIDO(" +
+                "PEDIDOID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "FECHAPEDIDO DATE," +
+                "COMERCIALID INTEGER," +
+                "PARTNERID INTEGER," +
+                "CONSTRAINT FK_COMERCIAL FOREIGN KEY (COMERCIALID) REFERENCES COMERCIAL(COMERCIALID)" +
+                ")";
+        db.execSQL(sentenciaCrearTabla);
+        sentenciaCrearTabla = "CREATE TABLE ARTICULO(" +
+                "ARTICULOID INTEGER PRIMARY KEY NOT NULL," +
+                "CATEGORIAID INTEGER," +
+                "DESCRIPCION TEXT," +
+                "PR_VENTA NUMERIC," +
+                "PR_COMPRA NUMERIC," +
+                "STOCK INTEGER," +
+                "STOCK_MINIMO INTEGER," +
+                "UNIDADID INTEGER," +
+                "FOTO TEXT" +
+                ")";
+        db.execSQL(sentenciaCrearTabla);
+        sentenciaCrearTabla = "CREATE TABLE LINEA(" +
+                "PEDIDOID INTEGER NOT NULL PRIMARY KEY," +
+                "ARTICULOID INTEGER NOT NULL PRIMARY KEY," +
+                "PRECIO NUMERIC," +
+                "CANTIDAD INTEGER," +
+                "DESCUENTO INTEGER," +
+                "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)," +
+                "CONSTRAINT FK_PEDIDO1 FOREIGN KEY (PEDIDOID) REFERENCES CAB_PEDIDO(PEDIDOID)" +
+                ")";
 
     }
 
