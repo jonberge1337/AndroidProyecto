@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        UsuariosSQL tabla = new UsuariosSQL(this, "DBUsuarios", null, 1);
+        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
         final SQLiteDatabase db = tabla.getWritableDatabase();
 
         usuario = findViewById(R.id.txtUsername);
