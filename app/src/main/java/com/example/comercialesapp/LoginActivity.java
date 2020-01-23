@@ -28,9 +28,9 @@ public class LoginActivity extends AppCompatActivity {
         botonLogin = findViewById(R.id.btnlogin);
         if (db != null){
             String usuarios[] = {
-                    "INSERT INTO COMERCIAL(COMERCIALID, NOMBRE, CORREO, PASSWD) VALUES(1, 'PATXI', 'patxi1337@cebanc.com', 'CEBANC1819')",
-                    "INSERT INTO COMERCIAL(COMERCIALID, NOMBRE, CORREO, PASSWD) VALUES(2, 'EDURNE', 'edurne1337@cebanc.com', 'CEBANC1819')",
-                    "INSERT INTO COMERCIAL(COMERCIALID, NOMBRE, CORREO, PASSWD) VALUES(3, 'JAVI', 'javi1337@cebanc.com', 'CEBANC1819')"
+                    "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'PATXI', 'patxi1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'patxi1337@cebanc.com')",
+                    "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'EDURNE', 'edurne1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'edurne1337@cebanc.com')",
+                    "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'JAVI', 'javi1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'javi1337@cebanc.com')"
             };
             for (String insert : usuarios) {
                 db.execSQL(insert);
