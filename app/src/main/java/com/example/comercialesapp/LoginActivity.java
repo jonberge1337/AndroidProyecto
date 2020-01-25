@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         passwd = findViewById(R.id.txtPassword);
         botonLogin = findViewById(R.id.btnlogin);
         if (db != null){
-            String usuarios[] = {
+            final String usuarios[] = {
                     "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'PATXI', 'patxi1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'patxi1337@cebanc.com')",
                     "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'EDURNE', 'edurne1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'edurne1337@cebanc.com')",
                     "INSERT INTO COMERCIAL(NOMBRE, CORREO, PASSWD) SELECT 'JAVI', 'javi1337@cebanc.com', 'CEBANC1819' WHERE NOT EXISTS(SELECT * FROM COMERCIAL WHERE CORREO = 'javi1337@cebanc.com')"
@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                         Cursor c;
                         c = db.rawQuery(consulta, null);
                         if (c.moveToFirst()){
+                            db.execSQL("UPDATE COMERCIAL SET LOGUEADO = 1 WHERE CORREO = '" + usuario.getText().toString() + "'");
                             Intent intento = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intento);
                             db.close();

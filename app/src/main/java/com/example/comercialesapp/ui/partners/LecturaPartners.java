@@ -1,5 +1,7 @@
 package com.example.comercialesapp.ui.partners;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.R;
+import com.example.comercialesapp.TablaSQL;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -31,6 +35,16 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         PartnersXML xml  = new PartnersXML();
         xml.generarDOM();
         partners = xml.leerPartner();
+
+        TablaSQL tabla = new TablaSQL(getActivity(), "DBUsuarios", null, 1);
+        final SQLiteDatabase db = tabla.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM PARTNER", null);
+
+        if(c.moveToFirst()){
+
+
+
+        }
 
         AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
         listaPartners = root.findViewById(R.id.lstPartnersMostrar);

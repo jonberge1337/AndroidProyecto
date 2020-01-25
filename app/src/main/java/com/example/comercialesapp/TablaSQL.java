@@ -73,6 +73,7 @@ public class TablaSQL extends SQLiteOpenHelper {
                 "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)," +
                 "CONSTRAINT FK_PEDIDO1 FOREIGN KEY (PEDIDOID) REFERENCES CAB_PEDIDO(PEDIDOID)" +
                 ")";
+        db.execSQL(sentenciaCrearTabla);
 
     }
 
