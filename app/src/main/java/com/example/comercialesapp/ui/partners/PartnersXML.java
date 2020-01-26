@@ -1,8 +1,10 @@
 package com.example.comercialesapp.ui.partners;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.comercialesapp.BuildConfig;
+import com.example.comercialesapp.TablaSQL;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -145,6 +147,9 @@ public class PartnersXML {
         String correo;
         String telefono;
         ArrayList<Partner> xml = new ArrayList<>();
+
+//        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
+//        final SQLiteDatabase db = tabla.getWritableDatabase();
 
         NodeList partners = documento.getElementsByTagName("partner");
 

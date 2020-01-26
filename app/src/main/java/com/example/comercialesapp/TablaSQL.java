@@ -65,13 +65,14 @@ public class TablaSQL extends SQLiteOpenHelper {
                 ")";
         db.execSQL(sentenciaCrearTabla);
         sentenciaCrearTabla = "CREATE TABLE LINEA(" +
-                "PEDIDOID INTEGER NOT NULL PRIMARY KEY," +
-                "ARTICULOID INTEGER NOT NULL PRIMARY KEY," +
+                "PEDIDOID INTEGER NOT NULL," +
+                "ARTICULOID INTEGER NOT NULL," +
                 "PRECIO NUMERIC," +
                 "CANTIDAD INTEGER," +
                 "DESCUENTO INTEGER," +
                 "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)," +
-                "CONSTRAINT FK_PEDIDO1 FOREIGN KEY (PEDIDOID) REFERENCES CAB_PEDIDO(PEDIDOID)" +
+                "CONSTRAINT FK_PEDIDO1 FOREIGN KEY (PEDIDOID) REFERENCES CAB_PEDIDO(PEDIDOID)," +
+                "CONSTRAINT PK_LINEA PRIMARY KEY (PEDIDOID, ARTICULOID)" +
                 ")";
         db.execSQL(sentenciaCrearTabla);
 
