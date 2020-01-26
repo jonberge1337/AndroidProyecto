@@ -1,10 +1,8 @@
 package com.example.comercialesapp.ui.partners;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.comercialesapp.BuildConfig;
-import com.example.comercialesapp.TablaSQL;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -31,6 +29,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 public class PartnersXML {
+    private String idPartner;
     private String empresa;
     private String nombre;
     private String apellido1;
@@ -47,6 +46,24 @@ public class PartnersXML {
     private File fichero = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/partner.xml");
 
     public PartnersXML(String empresa, String nombre, String apellido1, String apellido2, String dni,
+                       String ciudad, String direccion1, String direccion2,
+                       String formapagoID, String correo, String telefono, String comercial) {
+        this.empresa = empresa;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.dni = dni;
+        this.ciudad = ciudad;
+        this.direccion1 = direccion1;
+        this.direccion2 = direccion2;
+        this.formapagoID = formapagoID;
+        this.comercial = comercial;
+        this.telefono = telefono;
+        this.correo = correo;
+    }
+
+
+    public PartnersXML(String idPartner, String empresa, String nombre, String apellido1, String apellido2, String dni,
                        String ciudad, String direccion1, String direccion2,
                        String formapagoID, String correo, String telefono, String comercial) {
         this.empresa = empresa;

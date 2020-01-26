@@ -1,6 +1,8 @@
 package com.example.comercialesapp.ui.partners;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.MainActivity;
 import com.example.comercialesapp.R;
+import com.example.comercialesapp.TablaSQL;
 
 import java.util.Objects;
 
@@ -57,7 +60,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
         return root;
     }
 
-    public void generarXml(){
+    public void generarPartner(){
         boolean camposVacios = false;
         Log.e("Metodo", "Entra");
 
@@ -75,6 +78,50 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
 
         if (!camposVacios){
             Log.e("prueba", empresa.getText().toString());
+
+            TablaSQL tabla = new TablaSQL(getActivity(), "DBUsuarios", null, 1);
+            final SQLiteDatabase db = tabla.getWritableDatabase();
+
+
+            String consulta = "SELECT * FROM PARTNER WHERE DNI = '" + dni.getText().toString() + "'";
+            Cursor c = db.rawQuery(consulta, null);
+
+            if (c.moveToFirst()){
+                consulta = "UPDATE PARTNER SET EMPRESA = '" + c.getString(c.getColumnIndex("EMPRESA")) + "'," +
+                    "NOMBRE = '" + c.getString(c.getColumnIndex("NOMBRE")) + "'," +
+                    "APELLIDO1 = '" + c.getString(c.getColumnIndex("APELLIDO1")) + "'," +
+                    "APELLIDO2 = '" + c.getString(c.getColumnIndex("APELLIDO2")) + "'," +
+                    "CIUDAD = '" + c.getString(c.getColumnIndex("CIUDAD")) + "'," +
+                    "DIRECCION1 = '" + c.getString(c.getColumnIndex("DIRECCION1")) + "'," +
+                    "DIRECCION2 = '" + c.getString(c.getColumnIndex("DIRECCION2")) + "'," +
+                    "FORMAPAGOID = '" + c.getString(c.getColumnIndex("FORMAPAGOID")) + "'" +
+                    "WHERE PARTNERID = " + c.getString(c.getColumnIndex("PARTNERID"));
+                db.execSQL(consulta);
+            } else {
+                String comercial;
+                consulta = "SELECT COMERCIALID FROM COMERCIAL WHERE LOGUEADO = 1";
+                Cursor cursorComercial = db.rawQuery(consulta, null);
+                cursorComercial.moveToFirst();
+                comercial = cursorComercial.getString(cursorComercial.getColumnIndex("COMERCIALID"));
+                cursorComercial.close();
+
+                consulta = "INSERT INTO PARTNER(EMPRESA, NOMBRE, APELLIDO1, APELLIDO2, DNI, CIUDAD, DIRECCION1, DIRECCION2, FORMAPAGOID, CORREO, TELEFONO, COMERCIALID)" +
+                        " VALUES ('" + empresa.getText().toString() + "'," +
+                        "'" + nombre.getText().toString() + "', " +
+                        "'" + apellido1.getText().toString() + "'," +
+                        " '" + apellido2.getText().toString() + "'," +
+                        " '" + dni.getText().toString() + "'," +
+                        " '" + ciudad.getText().toString() + "'," +
+                        " '" + direccion1.getText().toString() + "'," +
+                        " '" + direccion2.getText().toString() + "'," +
+                        " '" + formapagoID.getText().toString() + "'," +
+                        " '" + correo.getText().toString() + "'," +
+                        " '" + telefono.getText().toString() + "'," +
+                        "" + comercial + ")";
+
+                db.execSQL(consulta);
+            }
+            c.close();
             PartnersXML xmlPartner = new PartnersXML(empresa.getText().toString(), nombre.getText().toString(),
                     apellido1.getText().toString(), apellido2.getText().toString(), dni.getText().toString(),
                     ciudad.getText().toString(), direccion1.getText().toString(), direccion2.getText().toString(),
@@ -89,7 +136,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        generarXml();
+        generarPartner();
 
 //      getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
         Fragment newFragment = new LecturaPartners();

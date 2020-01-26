@@ -6,7 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.comercialesapp.ui.partners.PartnersXML;
+
 public class TablaSQL extends SQLiteOpenHelper {
+
+//    public TablaSQL(@Nullable PartnersXML context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+//        super(context, name, factory, version);
+//    }
 
     public TablaSQL(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -23,8 +29,8 @@ public class TablaSQL extends SQLiteOpenHelper {
                 " DNI TEXT," +
                 " TELEFONO TEXT," +
                 " DIRECCION TEXT," +
-                " CORREO TEXTO NOT NULL," +
-                " PASSWD TEXTO NOT NULL," +
+                " CORREO TEXT NOT NULL," +
+                " PASSWD TEXT NOT NULL," +
                 "LOGUEADO BOOLEAN," +
                 " CONSTRAINT UK_COMERCIAL_CORREO UNIQUE (CORREO)" +
                 ")";
@@ -39,6 +45,8 @@ public class TablaSQL extends SQLiteOpenHelper {
                 "CIUDAD TEXT," +
                 "DIRECCION1 TEXT," +
                 "DIRECCION2 TEXT," +
+                "CORREO TEXT," +
+                "TELEFONO TEXT," +
                 "FORMAPAGOID INTEGER NOT NULL," +
                 "COMERCIALID INTEGER NOT NULL," +
                 "CONSTRAINT FK_COMERCIAL FOREIGN KEY (COMERCIALID) REFERENCES COMERCIAL(COMERCIALID)" +

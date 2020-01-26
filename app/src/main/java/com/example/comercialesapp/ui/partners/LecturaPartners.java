@@ -3,13 +3,13 @@ package com.example.comercialesapp.ui.partners;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,21 +30,39 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_partners, container, false);
         this.vista = root;
-        ArrayList<Partner> partners;
-
-        PartnersXML xml  = new PartnersXML();
-        xml.generarDOM();
-        partners = xml.leerPartner();
+        ArrayList<Partner> partners = new ArrayList<>();
 
         TablaSQL tabla = new TablaSQL(getActivity(), "DBUsuarios", null, 1);
         final SQLiteDatabase db = tabla.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM PARTNER", null);
 
-        if(c.moveToFirst()){
+        String nombre;
+        String apellido1;
+        String apellido2;
+        String correo;
+        String telefono;
+
+        if (c.moveToFirst()){
+            while (c.moveToNext()){
+
+                nombre = c.getString(c.getColumnIndex("NOMBRE"));
+                Log.e("Nombre", nombre);
+                apellido1 = c.getString(c.getColumnIndex("APELLIDO1"));
+                Log.e("Apellido1", apellido1);
+                apellido2 = c.getString(c.getColumnIndex("APELLIDO2"));
+                Log.e("Apellido2", apellido2);
+                correo = c.getString(c.getColumnIndex("CORREO"));
+                Log.e("Correo", correo);
+                telefono = c.getString(c.getColumnIndex("TELEFONO"));
+                Log.e("Telefono", telefono);
 
 
+                Partner partner = new Partner(nombre + " " + apellido1 + " " + apellido2, correo, telefono);
+                partners.add(partner);
 
+            }
         }
+        c.close();
 
         AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
         listaPartners = root.findViewById(R.id.lstPartnersMostrar);
