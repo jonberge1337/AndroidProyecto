@@ -22,6 +22,8 @@ import com.example.comercialesapp.R;
 import com.example.comercialesapp.TablaSQL;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EscrituraPartners extends Fragment implements View.OnClickListener {
     private EditText empresa;
@@ -38,7 +40,7 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
     private View vista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             final ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_crear_partner, container, false);
         this.vista = root;
 
@@ -56,25 +58,54 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
 
         Button crearPartner = root.findViewById(R.id.btnPartnerNuevo);
 
+        dni.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    Pattern expresion = Pattern.compile("^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke]$");
+                    Matcher correcto = expresion.matcher(dni.getText().toString());
+                    if (!correcto.find()){
+                        Toast.makeText(getActivity(), "No has introducido un DNI correcto", Toast.LENGTH_SHORT).show();
+                        dni.setText("");
+                    }
+                }
+            }
+        });
+
+        correo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Pattern expresion = Pattern.compile("^.+@.+[.]{1}[a-z]{2,3}");
+                    Matcher correcto = expresion.matcher(correo.getText().toString());
+                    if (!correcto.find()){
+                        Toast.makeText(getActivity(), "No es un correo valido", Toast.LENGTH_SHORT).show();
+                        correo.setText("");
+                    }
+                }
+            }
+        });
+
+        telefono.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    Pattern expresion = Pattern.compile("^[679]{1}[0-9]{8}$");
+                    Matcher correcto = expresion.matcher(telefono.getText().toString());
+                    if (!correcto.find()){
+                        Toast.makeText(getActivity(), "No es un telefono valido", Toast.LENGTH_SHORT).show();
+                        telefono.setText("");
+                    }
+                }
+            }
+        });
+
         crearPartner.setOnClickListener(this);
         return root;
     }
 
     public void generarPartner(){
         boolean camposVacios = false;
-        Log.e("Metodo", "Entra");
-
-        LinearLayout grupo = Objects.requireNonNull(getView()).findViewById(R.id.layoutCreacionPartnersID);
-        for (int i = 0; i < grupo.getChildCount(); i++){
-            View texto = grupo.getChildAt(i);
-            if (texto instanceof EditText){
-                Log.e("", "Es instancia de editText");
-                if (texto.toString().length() > 0){
-                    camposVacios = true;
-                }
-            }
-        }
-
 
         if (!camposVacios){
             Log.e("prueba", empresa.getText().toString());
@@ -137,25 +168,25 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         generarPartner();
-
+        if(empresa.length() > 0 && nombre.length() > 0 && apellido2.length() > 0 && apellido1.length() > 0 && dni.length() > 0 && correo.length() > 0 && telefono.length() > 0) {
 //      getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-        Fragment newFragment = new LecturaPartners();
-        FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+            Fragment newFragment = new LecturaPartners();
+            FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
 
 // Replace whatever is in the fragment_container view with this fragment,
 // and add the transaction to the back stack if needed
-        transaction.replace(R.id.layoutCreacionPartnersID, newFragment);
-        transaction.addToBackStack(null);
+            transaction.replace(R.id.layoutCreacionPartnersID, newFragment);
+            transaction.addToBackStack(null);
 
 // Commit the transaction
-        transaction.commit();
-        LinearLayout layout = this.vista.findViewById(R.id.layoutCreacionPartnersID);
-        layout.setVisibility(View.GONE);
+            transaction.commit();
+            LinearLayout layout = this.vista.findViewById(R.id.layoutCreacionPartnersID);
+            layout.setVisibility(View.GONE);
 
-        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-        Intent intencion = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-        startActivity(intencion);
-        Toast.makeText(getActivity().getApplicationContext(), "El partner ha sido añadido al fichero", Toast.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            Intent intencion = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+            startActivity(intencion);
+            Toast.makeText(getActivity().getApplicationContext(), "El partner ha sido añadido al fichero", Toast.LENGTH_SHORT).show();
 //        LinearLayout layout2 = this.vista.findViewById(R.id.fragmentPartnersID);
 
 //        layout2.setVisibility(View.VISIBLE);
@@ -163,8 +194,9 @@ public class EscrituraPartners extends Fragment implements View.OnClickListener 
 //        String frase = newFragment.getView().toString();
 //        Toast.makeText(getActivity().getApplicationContext(), frase, Toast.LENGTH_SHORT).show();
 //        newFragment.getView().findViewById(R.id.invisibleLayout).setVisibility(View.VISIBLE);
-
-
+        } else {
+            Toast.makeText(getActivity(), "Tienes que rellenar todos los campos obligatorios", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

@@ -46,16 +46,10 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
             while (c.moveToNext()){
 
                 nombre = c.getString(c.getColumnIndex("NOMBRE"));
-                Log.e("Nombre", nombre);
                 apellido1 = c.getString(c.getColumnIndex("APELLIDO1"));
-                Log.e("Apellido1", apellido1);
                 apellido2 = c.getString(c.getColumnIndex("APELLIDO2"));
-                Log.e("Apellido2", apellido2);
                 correo = c.getString(c.getColumnIndex("CORREO"));
-                Log.e("Correo", correo);
                 telefono = c.getString(c.getColumnIndex("TELEFONO"));
-                Log.e("Telefono", telefono);
-
 
                 Partner partner = new Partner(nombre + " " + apellido1 + " " + apellido2, correo, telefono);
                 partners.add(partner);

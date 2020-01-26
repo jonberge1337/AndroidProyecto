@@ -44,6 +44,9 @@
     <string name="LoginPasswd">Contraseña</string>
     <string name="LoginCorreo">Correo</string>
     <string name="LoginInicioSesion">Iniciar sesión</string>
+    <string name="ej_943512438">ej:943512438</string>
+    <string name="ej_correo">ej:patxi@cebanc.com</string>
+    <string name="_dni">ej:42415241M</string>
 
     <string-array name="partners">
         <item>Cebanc</item>

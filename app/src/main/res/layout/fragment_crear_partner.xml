@@ -157,6 +157,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
                             android:ems="10"
+                            android:hint="@string/_dni"
                             android:inputType="textPersonName" />
                     </LinearLayout>
 
@@ -268,6 +269,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
                             android:ems="10"
+                            android:hint="@string/ej_correo"
                             android:inputType="textEmailAddress" />
                     </LinearLayout>
 
@@ -290,6 +292,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
                             android:ems="10"
+                            android:hint="@string/ej_943512438"
                             android:inputType="phone" />
                     </LinearLayout>
                     <Button

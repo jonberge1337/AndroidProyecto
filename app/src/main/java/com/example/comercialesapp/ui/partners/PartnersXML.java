@@ -165,9 +165,6 @@ public class PartnersXML {
         String telefono;
         ArrayList<Partner> xml = new ArrayList<>();
 
-//        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
-//        final SQLiteDatabase db = tabla.getWritableDatabase();
-
         NodeList partners = documento.getElementsByTagName("partner");
 
         for (int i = 0; i < partners.getLength(); i++) {
