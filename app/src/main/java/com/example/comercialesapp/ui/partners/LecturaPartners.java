@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,7 +27,6 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
     private ImageButton nuevoPartner;
     private ListView listaPartners;
     private View vista;
-    private ListView lista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,9 +64,12 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
         listaPartners = root.findViewById(R.id.lstPartnersMostrar);
         listaPartners.setAdapter(adaptador);
-
-        lista = root.findViewById(R.id.lstPartnersMostrar);
-        lista.setOnClickListener(this);
+//        listaPartners.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(getActivity(), "Hola mundo", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         nuevoPartner = root.findViewById(R.id.btnAbrirCreacionPartner);
         nuevoPartner.setOnClickListener(this);
@@ -75,20 +79,23 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+//        Toast.makeText(getActivity(), "Hola mudno", Toast.LENGTH_SHORT).show();
         Fragment newFragment = new EscrituraPartners();
         FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
 
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack if needed
         transaction.replace(R.id.fragmentPartnersID, newFragment);
         transaction.addToBackStack(null);
 
-// Commit the transaction
         transaction.commit();
         LinearLayout layout = this.vista.findViewById(R.id.invisibleLayout);
         layout.setVisibility(View.GONE);
-//        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 
     }
+
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        Log.e("prueba" , "prueba");
+//        Toast.makeText(getActivity(), "Hola mundo", Toast.LENGTH_SHORT).show();
+//    }
 }

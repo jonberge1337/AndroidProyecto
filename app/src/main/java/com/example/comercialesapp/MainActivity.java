@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         if (pedido.exists()) {
             emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
         }
-//        if (emailIntent.getExtras() != null) {
 
             String[] TO = {"jseara@irakasleak.cebanc.com"}; //aquí pon tu correo
             String[] CC = {""};
@@ -102,10 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
             }
-
-//        } else {
-//            Toast.makeText(getApplicationContext(), "No hay Partners o Pedidos nuevos que enviar", Toast.LENGTH_LONG).show();
-//        }
 
     }
 }

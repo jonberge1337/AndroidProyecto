@@ -1,6 +1,7 @@
 package com.example.comercialesapp.ui.partners;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,25 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.comercialesapp.R;
+import com.example.comercialesapp.TablaSQL;
 
 import java.util.ArrayList;
 
-public class AdaptadorPartner extends ArrayAdapter{
+public class AdaptadorPartner extends ArrayAdapter {
     private Activity contexto;
     private ArrayList<Partner> datos;
+    private Fragment pantalla;
 
-    public AdaptadorPartner(Activity context, ArrayList<Partner> datos) {
+    public AdaptadorPartner(Activity context, ArrayList<Partner> datos, Fragment pantalla) {
         super(context, R.layout.listview_partner, datos);
         this.contexto = context;
         this.datos = datos;
+        this.pantalla = pantalla;
     }
+
 
     private static class ViewHolder{
         private TextView id;
@@ -53,11 +59,23 @@ public class AdaptadorPartner extends ArrayAdapter{
             item = convertView;
         }
 
-        ViewHolder holder = (ViewHolder) item.getTag();
+        final ViewHolder holder = (ViewHolder) item.getTag();
         holder.id.setText(partner.getId());
         holder.nombre.setText(partner.getNombre());
         holder.telefono.setText(partner.getTelefono());
         holder.correo.setText(partner.getCorreo());
+        holder.boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getContext(), holder.nombre.getText().toString(), Toast.LENGTH_SHORT).show();
+                TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
+                final SQLiteDatabase db = tabla.getWritableDatabase();
+
+                String consulta = "DELETE FROM PARTNER WHERE PARTNERID = " + holder.id.getText().toString();
+                db.execSQL(consulta);
+
+            }
+        });
 
         return item;
     }
