@@ -36,6 +36,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         final SQLiteDatabase db = tabla.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM PARTNER", null);
 
+        String id;
         String nombre;
         String apellido1;
         String apellido2;
@@ -45,15 +46,15 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         if (c.moveToFirst()){
             while (c.moveToNext()){
 
+                id = c.getString(c.getColumnIndex("PARTNERID"));
                 nombre = c.getString(c.getColumnIndex("NOMBRE"));
                 apellido1 = c.getString(c.getColumnIndex("APELLIDO1"));
                 apellido2 = c.getString(c.getColumnIndex("APELLIDO2"));
                 correo = c.getString(c.getColumnIndex("CORREO"));
                 telefono = c.getString(c.getColumnIndex("TELEFONO"));
 
-                Partner partner = new Partner(nombre + " " + apellido1 + " " + apellido2, correo, telefono);
+                Partner partner = new Partner(id,nombre + " " + apellido1 + " " + apellido2, correo, telefono);
                 partners.add(partner);
-
             }
         }
         c.close();

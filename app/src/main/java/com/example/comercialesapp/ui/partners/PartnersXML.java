@@ -158,6 +158,7 @@ public class PartnersXML {
     }
 
     public ArrayList<Partner> leerPartner(){
+        String id;
         String nombre;
         String apellido1;
         String apellido2;
@@ -172,13 +173,14 @@ public class PartnersXML {
             if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                 Element e = (Element) nodo;
 
+                id = e.getElementsByTagName("PARTNERID").item(0).getTextContent();
                 nombre = e.getElementsByTagName("nombre").item(0).getTextContent();
                 apellido1 = e.getElementsByTagName("apellido1").item(0).getTextContent();
                 apellido2 = e.getElementsByTagName("apellido2").item(0).getTextContent();
                 correo = e.getElementsByTagName("correo").item(0).getTextContent();
                 telefono = e.getElementsByTagName("telefono").item(0).getTextContent();
 
-                Partner partner = new Partner(nombre + " " + apellido1 + " " + apellido2, correo, telefono);
+                Partner partner = new Partner(id,nombre + " " + apellido1 + " " + apellido2, correo, telefono);
                 xml.add(partner);
 
             }
