@@ -25,6 +25,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
     private ImageButton nuevoPartner;
     private ListView listaPartners;
     private View vista;
+    private ListView lista;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);
         listaPartners = root.findViewById(R.id.lstPartnersMostrar);
         listaPartners.setAdapter(adaptador);
+
+        lista = root.findViewById(R.id.lstPartnersMostrar);
+        lista.setOnClickListener(this);
 
         nuevoPartner = root.findViewById(R.id.btnAbrirCreacionPartner);
         nuevoPartner.setOnClickListener(this);
