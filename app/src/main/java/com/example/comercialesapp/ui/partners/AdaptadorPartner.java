@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.comercialesapp.R;
 import com.example.comercialesapp.TablaSQL;
@@ -22,13 +22,11 @@ import java.util.ArrayList;
 public class AdaptadorPartner extends ArrayAdapter {
     private Activity contexto;
     private ArrayList<Partner> datos;
-    private Fragment pantalla;
 
-    public AdaptadorPartner(Activity context, ArrayList<Partner> datos, Fragment pantalla) {
+    public AdaptadorPartner(Activity context, ArrayList<Partner> datos) {
         super(context, R.layout.listview_partner, datos);
         this.contexto = context;
         this.datos = datos;
-        this.pantalla = pantalla;
     }
 
 
@@ -38,6 +36,7 @@ public class AdaptadorPartner extends ArrayAdapter {
         private EditText telefono;
         private EditText correo;
         private ImageButton boton;
+        private LinearLayout pantalla;
     }
 
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -54,6 +53,7 @@ public class AdaptadorPartner extends ArrayAdapter {
             holder.telefono = item.findViewById(R.id.txtTelefonomostrar);
             holder.correo = item.findViewById(R.id.txtCorreoMostrar);
             holder.boton = item.findViewById(R.id.btnEliminarPartner);
+            holder.pantalla = item.findViewById(R.id.LayoutListviewPartnerID);
             item.setTag(holder);
         } else {
             item = convertView;
@@ -67,13 +67,13 @@ public class AdaptadorPartner extends ArrayAdapter {
         holder.boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), holder.nombre.getText().toString(), Toast.LENGTH_SHORT).show();
                 TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
                 final SQLiteDatabase db = tabla.getWritableDatabase();
 
                 String consulta = "DELETE FROM PARTNER WHERE PARTNERID = " + holder.id.getText().toString();
                 db.execSQL(consulta);
 
+                holder.pantalla.setVisibility(View.GONE);
             }
         });
 

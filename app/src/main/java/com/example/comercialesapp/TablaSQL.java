@@ -83,7 +83,14 @@ public class TablaSQL extends SQLiteOpenHelper {
                 "CONSTRAINT PK_LINEA PRIMARY KEY (PEDIDOID, ARTICULOID)" +
                 ")";
         db.execSQL(sentenciaCrearTabla);
-
+        sentenciaCrearTabla = "CREATE TABLE PEDIDO(" +
+                "ARTICULOID INTEGER NOT NULL PRIMARY KEY," +
+                "PRECIO NUMERIC," +
+                "CANTIDAD INTEGER," +
+                "DESCUENTO INTEGER," +
+                "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)," +
+                ")";
+        db.execSQL(sentenciaCrearTabla);
     }
 
     @Override

@@ -96,12 +96,31 @@
         android:layout_marginStart="30dp"
         android:text="@string/cantidadArticulo"
         />
+
+    <ImageButton
+        android:id="@+id/btnListviewPedidoQuitar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/quitar"
+        />
     <EditText
         android:id="@+id/txtCantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:ems="3"
+        />
+    <ImageButton
+        android:id="@+id/btnListviewPedidoAinadir"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ainadir"
         />
   </LinearLayout>
 </LinearLayout>
