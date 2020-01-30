@@ -1,6 +1,8 @@
 package com.example.comercialesapp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -101,6 +103,23 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
             }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
+        final SQLiteDatabase db = tabla.getWritableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM COMERCIAL WHERE LOGUEADO = 1", null);
+
+        if(c.moveToFirst()){
+
+            db.execSQL("UPDATE COMERCIAL SET LOGUEADO = 0 WHERE COMERCIALID = " + c.getString(c.getColumnIndex("COMERCIALID")));
+
+        }
 
     }
 }
