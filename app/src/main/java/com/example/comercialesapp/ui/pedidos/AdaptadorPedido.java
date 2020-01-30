@@ -3,6 +3,7 @@ package com.example.comercialesapp.ui.pedidos;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
@@ -25,13 +26,13 @@ import java.util.ArrayList;
 public class AdaptadorPedido extends ArrayAdapter {
     private Context contexto;
     private ArrayList<Pedido> datos;
-    private int imagenes[];
+    private boolean resumen;
 
-    public AdaptadorPedido(Activity context, ArrayList<Pedido> datos, int[] imagenes) {
+    public AdaptadorPedido(Activity context, ArrayList<Pedido> datos, boolean resumen) {
         super(context, R.layout.listview_articulo, datos);
         this.contexto = context;
         this.datos = datos;
-        this.imagenes = imagenes;
+        this.resumen = resumen;
     }
 
     static class ViewHolder {
@@ -73,58 +74,68 @@ public class AdaptadorPedido extends ArrayAdapter {
         holder.cantdad.setText(String.valueOf(pedido.getCantidad()));
         holder.precio.setText(String.valueOf(pedido.getPrecio()));
         holder.descuento.setText(String.valueOf(pedido.getDescuento()));
-        holder.imagen.setImageResource(imagenes[position]);
+        Resources resources = getContext().getResources();
+        holder.imagen.setImageResource(resources.getIdentifier(pedido.getImagen(), "drawable",
+                getContext().getPackageName()));
 
-        TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
-        final SQLiteDatabase db = tabla.getWritableDatabase();
 
-        holder.ainadir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = pedido.getArticuloID();
-                String precio = holder.precio.getText().toString();
-                String cantidad = holder.cantdad.getText().toString();
-                String descuento = holder.descuento.getText().toString();
+        if (!resumen){
+            TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
+            final SQLiteDatabase db = tabla.getWritableDatabase();
 
-                String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
+            holder.ainadir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id = pedido.getArticuloID();
+                    String precio = holder.precio.getText().toString();
+                    String cantidad = holder.cantdad.getText().toString();
+                    String descuento = holder.descuento.getText().toString();
 
-                Cursor c = db.rawQuery(consulta, null);
-                if (c.moveToFirst()){
-                    consulta = "UPDATE PEDIDO SET PRECIO = " + precio + ", CANTIDAD = " + cantidad +
-                            ", DESCUENTO = " + descuento + " WHERE ARTICULOID = " + id;
+                    String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
 
-                    db.execSQL(consulta);
-                } else {
-                    consulta = "INSERT INTO PEDIDO(ARTICULOID, CANTIDAD, DESCUENTO, PRECIO)" +
-                            " VALUES(" + id + "," + cantidad + "," + descuento + "," + precio + ")";
-                    db.execSQL(consulta);
+                    Cursor c = db.rawQuery(consulta, null);
+                    if (c.moveToFirst()){
+                        consulta = "UPDATE PEDIDO SET PRECIO = " + precio + ", CANTIDAD = " + cantidad +
+                                ", DESCUENTO = " + descuento + " WHERE ARTICULOID = " + id;
+
+                        db.execSQL(consulta);
+                    } else {
+                        consulta = "INSERT INTO PEDIDO(ARTICULOID, CANTIDAD, DESCUENTO, PRECIO)" +
+                                " VALUES(" + id + "," + cantidad + "," + descuento + "," + precio + ")";
+                        db.execSQL(consulta);
+                    }
                 }
-            }
-        });
+            });
 
-        holder.quitar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String id = pedido.getArticuloID();
-                String precio = holder.precio.getText().toString();
-                String cantidad = holder.cantdad.getText().toString();
-                String descuento = holder.descuento.getText().toString();
+            holder.quitar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id = pedido.getArticuloID();
+                    String precio = holder.precio.getText().toString();
+                    String cantidad = holder.cantdad.getText().toString();
+                    String descuento = holder.descuento.getText().toString();
 
-                String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
+                    String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
 
-                Cursor c = db.rawQuery(consulta, null);
-                if (c.moveToFirst()){
-                    consulta = "UPDATE PEDIDO SET PRECIO = " + precio + ", CANTIDAD = " + cantidad +
-                            ", DESCUENTO = " + descuento + " WHERE ARTICULOID = " + id;
+                    Cursor c = db.rawQuery(consulta, null);
+                    if (c.moveToFirst()){
+                        consulta = "UPDATE PEDIDO SET PRECIO = " + precio + ", CANTIDAD = " + cantidad +
+                                ", DESCUENTO = " + descuento + " WHERE ARTICULOID = " + id;
 
-                    db.execSQL(consulta);
-                } else {
-                    consulta = "DELETE FROM PEDIDO WHERE ARTICULOID = " + id;
-                    db.execSQL(consulta);
+                        db.execSQL(consulta);
+                    } else {
+                        consulta = "DELETE FROM PEDIDO WHERE ARTICULOID = " + id;
+                        db.execSQL(consulta);
+                    }
+
                 }
+            });
 
-            }
-        });
+        } else {
+            holder.ainadir.setVisibility(View.INVISIBLE);
+            holder.quitar.setVisibility(View.INVISIBLE);
+            holder.cantdad.setEnabled(false);
+        }
 
 
         return item;

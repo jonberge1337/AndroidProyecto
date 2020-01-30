@@ -42,7 +42,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
         String correo;
         String telefono;
 
-        if (c.moveToFirst()){
+//        if (c.moveToFirst()){
             while (c.moveToNext()){
 
                 id = c.getString(c.getColumnIndex("PARTNERID"));
@@ -55,7 +55,7 @@ public class LecturaPartners  extends Fragment implements View.OnClickListener {
                 Partner partner = new Partner(id,nombre + " " + apellido1 + " " + apellido2, correo, telefono);
                 partners.add(partner);
             }
-        }
+//        }
         c.close();
 
         AdaptadorPartner adaptador = new AdaptadorPartner(getActivity(), partners);

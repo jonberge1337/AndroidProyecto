@@ -88,7 +88,7 @@ public class TablaSQL extends SQLiteOpenHelper {
                 "PRECIO NUMERIC," +
                 "CANTIDAD INTEGER," +
                 "DESCUENTO INTEGER," +
-                "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)," +
+                "CONSTRAINT FK_PEDIDO FOREIGN KEY (ARTICULOID) REFERENCES ARTICULO(ARTICULOID)" +
                 ")";
         db.execSQL(sentenciaCrearTabla);
     }

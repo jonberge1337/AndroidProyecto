@@ -51,12 +51,13 @@ public class Catalogo extends Fragment implements View.OnClickListener {
             imagenes[i] = resourceId;
         }
 
-        AdaptadorPedido adaptador = new AdaptadorPedido(getActivity(), pedidos, imagenes);
+        AdaptadorPedido adaptador = new AdaptadorPedido(getActivity(), pedidos, false);
         listaPedidos = root.findViewById(R.id.lstArticulos);
         listaPedidos.setAdapter(adaptador);
         listaPedidos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                
                 EditText cantidad = view.findViewById(R.id.txtCantidad);
                 TextView articuloID = view.findViewById(R.id.articuloID);
                 int cuantia = Integer.parseInt(cantidad.getText().toString());
