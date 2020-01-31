@@ -61,7 +61,7 @@ public class TablaSQL extends SQLiteOpenHelper {
                 ")";
         db.execSQL(sentenciaCrearTabla);
         sentenciaCrearTabla = "CREATE TABLE ARTICULO(" +
-                "ARTICULOID INTEGER PRIMARY KEY NOT NULL," +
+                "ARTICULOID INTEGER NOT NULL PRIMARY KEY," +
                 "CATEGORIAID INTEGER," +
                 "DESCRIPCION TEXT," +
                 "PR_VENTA NUMERIC," +

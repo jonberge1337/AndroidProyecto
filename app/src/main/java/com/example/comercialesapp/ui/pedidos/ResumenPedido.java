@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +25,15 @@ import java.util.Objects;
 
 public class ResumenPedido extends Fragment implements View.OnClickListener {
     private ImageButton botonInicio;
-    private ArrayList<Pedido> pedidos;
-    private ArrayList<String> partners;
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
+    private ArrayList<String> partners = new ArrayList<>();
     private ListView listaPartners;
     private Spinner partner;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_resumen_pedido, container, false);
-
 
         TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
         final SQLiteDatabase db = tabla.getWritableDatabase();
@@ -44,6 +45,7 @@ public class ResumenPedido extends Fragment implements View.OnClickListener {
         Cursor c = db.rawQuery(consulta, null);
 
         while (c.moveToNext()){
+
             String id;
             String descripcion;
             float precio;
@@ -75,14 +77,14 @@ public class ResumenPedido extends Fragment implements View.OnClickListener {
         partner.setAdapter(adaptadorPartners);
 
         AdaptadorPedido adaptador = new AdaptadorPedido(getActivity(), pedidos, true);
-        listaPartners = root.findViewById(R.id.lstPartnersMostrar);
+        listaPartners = root.findViewById(R.id.lstResumenPedido);
         listaPartners.setAdapter(adaptador);
 
         this.botonInicio = root.findViewById(R.id.btnResumenPedidoHome);
         this.botonInicio.setOnClickListener(this);
-
         return root;
     }
+
 
     @Override
     public void onClick(View v) {

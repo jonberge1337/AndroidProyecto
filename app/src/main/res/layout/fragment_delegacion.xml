@@ -13,15 +13,6 @@
         android:layout_width="413dp"
         android:layout_height="275dp" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/lblCorreoDelegacion"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="42sp"-->
-<!--        android:text="@string/correoDelegacion"-->
-<!--        android:textSize="24sp"-->
-<!--        android:clickable="true"/>-->
-
     <TextView
         android:id="@+id/lblTelefonoDelegacion"
         android:layout_width="wrap_content"

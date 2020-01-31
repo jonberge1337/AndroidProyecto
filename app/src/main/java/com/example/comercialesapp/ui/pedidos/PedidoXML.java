@@ -97,8 +97,6 @@ public class PedidoXML {
 
     }
 
-
-
     public ArrayList<Pedido> leerPedido(){
         String articuloId;
         String articuloDescripcion;

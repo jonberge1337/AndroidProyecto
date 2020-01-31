@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.comercialesapp.ui.pedidos.Pedido;
+import com.example.comercialesapp.ui.pedidos.PedidoXML;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -27,6 +29,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,15 +45,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 activarCorreo();
             }
         });
+        crearArticulos();
+        vaciarTablaPedido();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share)
@@ -74,6 +75,43 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void crearArticulos(){
+
+        final ArrayList<Pedido> pedidos;
+
+        PedidoXML xml  = new PedidoXML();
+        xml.generarDOM();
+        pedidos = xml.leerPedido();
+
+
+        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
+        final SQLiteDatabase db = tabla.getWritableDatabase();
+
+        String consulta;
+        Cursor c;
+        consulta = "DELETE FROM ARTICULO";
+        db.execSQL(consulta);
+
+        String id;
+        String descripcion;
+        float prVenta;
+        String foto;
+
+        for (Pedido articulo: pedidos){
+
+            id = articulo.getArticuloID();
+            descripcion = articulo.getArticuloNombre();
+            prVenta = articulo.getPrecio();
+            foto = articulo.getImagen();
+
+            consulta = "INSERT INTO ARTICULO(ARTICULOID, DESCRIPCION, PR_VENTA, FOTO) VALUES (" + id + ",'" + descripcion +
+                    "'," + prVenta + ",'" + foto + "')";
+            db.execSQL(consulta);
+
+        }
+    }
+
     public void activarCorreo() {
 
         File partners = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/articulos.xml");
@@ -106,6 +144,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void vaciarTablaPedido(){
+        TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);
+        final SQLiteDatabase db = tabla.getWritableDatabase();
+
+        String consulta = "DELETE FROM PEDIDO";
+        db.execSQL(consulta);
+
+        db.close();
+
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -121,5 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        c.close();
+        db.close();
     }
 }

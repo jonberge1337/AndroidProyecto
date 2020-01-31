@@ -48,10 +48,4 @@
     <string name="ej_correo">ej:patxi@cebanc.com</string>
     <string name="_dni">ej:42415241M</string>
 
-    <string-array name="partners">
-        <item>Cebanc</item>
-        <item>Adidas</item>
-        <item>Fsociety</item>
-        <item>Ecorp</item>
-    </string-array>
 </resources>

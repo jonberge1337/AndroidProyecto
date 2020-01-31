@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:layout_marginTop="40dp"
-            android:entries="@array/partners"/>
+            />
 
         <ImageButton
             android:id="@+id/btnResumenPedidoHome"
@@ -25,7 +25,7 @@
             android:adjustViewBounds="true"
             android:text="@string/botonPedidoHome"
             android:layout_weight="1"
-            android:src="@drawable/home"/>
+            android:src="@drawable/guardarPedido"/>
 
     </LinearLayout>
 

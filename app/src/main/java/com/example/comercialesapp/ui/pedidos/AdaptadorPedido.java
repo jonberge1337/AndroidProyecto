@@ -38,7 +38,7 @@ public class AdaptadorPedido extends ArrayAdapter {
     static class ViewHolder {
         private EditText articulo;
         private TextView articuloNombre;
-        private EditText cantdad;
+        private EditText cantidad;
         private TextView precio;
         private TextView descuento;
         private ImageView imagen;
@@ -57,7 +57,7 @@ public class AdaptadorPedido extends ArrayAdapter {
             final ViewHolder holder = new ViewHolder();
             holder.articulo = item.findViewById(R.id.articuloID);
             holder.articuloNombre = item.findViewById(R.id.txtArticuloCatalogo);
-            holder.cantdad = item.findViewById(R.id.txtCantidad);
+            holder.cantidad = item.findViewById(R.id.txtCantidad);
             holder.precio = item.findViewById(R.id.txtPrecio);
             holder.descuento = item.findViewById(R.id.txtDescuento);
             holder.imagen = item.findViewById(R.id.imgArticulo);
@@ -71,7 +71,7 @@ public class AdaptadorPedido extends ArrayAdapter {
         final ViewHolder holder = (ViewHolder) item.getTag();
         holder.articulo.setText(pedido.getArticuloID());
         holder.articuloNombre.setText(pedido.getArticuloNombre());
-        holder.cantdad.setText(String.valueOf(pedido.getCantidad()));
+        holder.cantidad.setText(String.valueOf(pedido.getCantidad()));
         holder.precio.setText(String.valueOf(pedido.getPrecio()));
         holder.descuento.setText(String.valueOf(pedido.getDescuento()));
         Resources resources = getContext().getResources();
@@ -86,9 +86,19 @@ public class AdaptadorPedido extends ArrayAdapter {
             holder.ainadir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int cantidad = 0;
+                    if (holder.cantidad.length() > 0){
+                        try {
+                            cantidad = Integer.parseInt(holder.cantidad.getText().toString());
+                            cantidad++;
+                        } catch (Exception e){
+                            cantidad = 0;
+                        }
+                    }
+
+                    holder.cantidad.setText(String.valueOf(cantidad));
                     String id = pedido.getArticuloID();
                     String precio = holder.precio.getText().toString();
-                    String cantidad = holder.cantdad.getText().toString();
                     String descuento = holder.descuento.getText().toString();
 
                     String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
@@ -110,9 +120,21 @@ public class AdaptadorPedido extends ArrayAdapter {
             holder.quitar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int cantidad = 0;
+                    if (holder.cantidad.length() > 0){
+                        try {
+                            cantidad = Integer.parseInt(holder.cantidad.getText().toString());
+                            if (cantidad > 0){
+                                cantidad--;
+                            }
+                        } catch (Exception e){
+                            cantidad = 0;
+                        }
+                    }
+
+                    holder.cantidad.setText(String.valueOf(cantidad));
                     String id = pedido.getArticuloID();
                     String precio = holder.precio.getText().toString();
-                    String cantidad = holder.cantdad.getText().toString();
                     String descuento = holder.descuento.getText().toString();
 
                     String consulta = "SELECT * FROM PEDIDO WHERE ARTICULOID = " + id;
@@ -134,7 +156,7 @@ public class AdaptadorPedido extends ArrayAdapter {
         } else {
             holder.ainadir.setVisibility(View.INVISIBLE);
             holder.quitar.setVisibility(View.INVISIBLE);
-            holder.cantdad.setEnabled(false);
+            holder.cantidad.setEnabled(false);
         }
 
 

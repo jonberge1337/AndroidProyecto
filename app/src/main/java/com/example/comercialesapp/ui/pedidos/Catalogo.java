@@ -1,6 +1,8 @@
 package com.example.comercialesapp.ui.pedidos;
 
 import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.R;
+import com.example.comercialesapp.TablaSQL;
+import com.example.comercialesapp.ui.partners.EscrituraPartners;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -50,7 +54,6 @@ public class Catalogo extends Fragment implements View.OnClickListener {
                     getContext().getPackageName());
             imagenes[i] = resourceId;
         }
-
         AdaptadorPedido adaptador = new AdaptadorPedido(getActivity(), pedidos, false);
         listaPedidos = root.findViewById(R.id.lstArticulos);
         listaPedidos.setAdapter(adaptador);
@@ -111,32 +114,14 @@ public class Catalogo extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        PedidoXML pedido = new PedidoXML();
-        pedido.generarDOM();
-        pedido.generarDocument();
-        pedido.generarXml();
-
         Fragment newFragment = new ResumenPedido();
         FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
 
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack if needed
-        transaction.replace(R.id.layoutCatalogoID, newFragment);
+        transaction.replace(R.id.layoutCatagoIDPrincipal, newFragment);
         transaction.addToBackStack(null);
 
-// Commit the transaction
         transaction.commit();
         LinearLayout layout = this.vista.findViewById(R.id.layoutCatalogoID);
         layout.setVisibility(View.GONE);
-        Fragment fragment = new Fragment();
-        Bundle bundle = new Bundle();
-        bundle.putStringArrayList("pedidoGenerado", pedidoGenerado);
-        float total = 0;
-        for (float i : precios){
-            total += i;
-        }
-        bundle.putFloat("precios", total);
-        bundle.putStringArrayList("idArticulos", idArticulos);
-        fragment.setArguments(bundle);
     }
 }
