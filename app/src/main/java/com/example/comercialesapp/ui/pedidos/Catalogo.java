@@ -1,8 +1,6 @@
 package com.example.comercialesapp.ui.pedidos;
 
 import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.comercialesapp.R;
-import com.example.comercialesapp.TablaSQL;
-import com.example.comercialesapp.ui.partners.EscrituraPartners;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -44,7 +40,7 @@ public class Catalogo extends Fragment implements View.OnClickListener {
 
         PedidoXML xml  = new PedidoXML();
         xml.generarDOM();
-        pedidos = xml.leerPedido();
+        pedidos = xml.leerCatalogo();
         imagenes = new int[pedidos.size()];
 
         Resources resources = getContext().getResources();

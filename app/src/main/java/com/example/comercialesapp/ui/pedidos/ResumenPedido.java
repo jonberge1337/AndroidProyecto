@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,7 +20,10 @@ import com.example.comercialesapp.MainActivity;
 import com.example.comercialesapp.R;
 import com.example.comercialesapp.TablaSQL;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ResumenPedido extends Fragment implements View.OnClickListener {
@@ -109,15 +113,28 @@ public class ResumenPedido extends Fragment implements View.OnClickListener {
                 "VALUES(date('now'), "+ comercialID + "," + partnerid + ")";
         db.execSQL(consulta);
 
-        consulta = "SELECT last_insert_rowid() AS ULTIMO";
+        consulta = "SELECT * FROM SQLITE_SEQUENCE"; // Nos da el id del ultimo insert
         c = db.rawQuery(consulta, null);
-        pedidoID = c.getInt(c.getColumnIndex("ULTIMO"));
-
-        for (Pedido pedido : pedidos){
-            consulta = "INSERT INTO LINEA VALUES(" + pedidoID + ", " + pedido.getArticuloID() +
-                    ", " + pedido.getPrecio() + ", " + pedido.getCantidad() + ", " + pedido.getDescuento() + ")";
-            db.execSQL(consulta);
+        if (c.moveToLast()){
+            pedidoID = c.getInt(1);
+        } else {
+            pedidoID = 0;
         }
+
+        if (pedidoID > 0){
+            for (Pedido pedido : pedidos){
+                consulta = "INSERT INTO LINEA VALUES(" + pedidoID + ", " + pedido.getArticuloID() +
+                        ", " + pedido.getPrecio() + ", " + pedido.getCantidad() + ", " + pedido.getDescuento() + ")";
+                db.execSQL(consulta);
+            }
+        } else {
+            Toast.makeText(getActivity(), "No se ha insertado", Toast.LENGTH_SHORT).show();
+        }
+
+        PedidoXML xml = new PedidoXML(pedidos, comercialID, partnerid, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()), pedidoID);
+        xml.generarDomPedido();
+        xml.generarDocument();
+        xml.generarXml();
 
         c.close();
         db.close();

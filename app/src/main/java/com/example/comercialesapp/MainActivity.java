@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.example.comercialesapp.ui.pedidos.Pedido;
 import com.example.comercialesapp.ui.pedidos.PedidoXML;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         PedidoXML xml  = new PedidoXML();
         xml.generarDOM();
-        pedidos = xml.leerPedido();
+        pedidos = xml.leerCatalogo();
 
 
         TablaSQL tabla = new TablaSQL(this, "DBUsuarios", null, 1);

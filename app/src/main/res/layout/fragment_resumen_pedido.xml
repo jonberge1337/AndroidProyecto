@@ -25,7 +25,7 @@
             android:adjustViewBounds="true"
             android:text="@string/botonPedidoHome"
             android:layout_weight="1"
-            android:src="@drawable/guardarPedido"/>
+            android:src="@drawable/guardar_pedido"/>
 
     </LinearLayout>
 

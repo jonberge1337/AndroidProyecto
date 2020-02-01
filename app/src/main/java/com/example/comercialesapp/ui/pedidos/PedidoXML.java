@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -32,12 +33,14 @@ import javax.xml.transform.stream.StreamResult;
 public class PedidoXML {
     private Document documento;
     private File fichero = new File("/storage/emulated/legacy/Download/Articulos.xml");
-    private ArrayList<Integer> imagenes = new ArrayList<>();
-    private String id;
-    private String descripcion;
-    private float precio;
-    private int cantidad;
-    private int descuento;
+//    private File ficheroPedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedidos.xml");
+    private String nombreFicheroPedido;
+    private File ficheroPedido;
+    private ArrayList<Pedido> pedidos;
+    private int pedidoID;
+    private int comercialID;
+    private int partnerID;
+    private String fecha;
 
 
 
@@ -45,13 +48,14 @@ public class PedidoXML {
 
     }
 
-    public PedidoXML(String id, String descripcion, float precio, int cantidad, int descuento, String ruta){
-        this.id = id;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.cantidad = cantidad;
-        this.descuento = descuento;
-        this.fichero.renameTo(new File(ruta));
+    public PedidoXML(ArrayList<Pedido> pedidos, int comercialID, int partnerID, String fecha, int pedidoID){
+        this.pedidos = pedidos;
+        this.comercialID = comercialID;
+        this.partnerID = partnerID;
+        this.fecha = fecha;
+        this.pedidoID = pedidoID;
+        this.nombreFicheroPedido = "/data/data/" + BuildConfig.APPLICATION_ID + "/pedidos_" + fecha + ".xml";
+        this.ficheroPedido = new File(this.nombreFicheroPedido);
     }
 
 
@@ -60,44 +64,90 @@ public class PedidoXML {
         DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
-            if (!this.fichero.exists()){
+            documento = builder.parse(this.fichero);
+        } catch (ParserConfigurationException | SAXException | IOException e) { e.printStackTrace();
+        }
+    }
+
+    public void generarDomPedido(){
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try {
+            builder = factory.newDocumentBuilder();
+            if (!ficheroPedido.exists()){
+                Log.e("existe", "no");
+                Log.e("nombre", this.nombreFicheroPedido);
                 DOMImplementation dom = builder.getDOMImplementation();
-                documento = dom.createDocument(null, "articulos", null);
+                documento = dom.createDocument(null, "pedidos", null);
             } else {
-                documento = builder.parse(this.fichero);
+                Log.e("existe", "si");
+                Log.e("nombre", this.nombreFicheroPedido);
+                documento = builder.parse(this.ficheroPedido);
             }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (IOException | ParserConfigurationException | SAXException e) {
             e.printStackTrace();
         }
     }
 
     public void generarDocument(){
 
-        Element articulo = documento.createElement("articulo");
+        Element albaran = documento.createElement("albaran");
         Attr atributo = documento.createAttribute("id");
-        atributo.setValue(this.id);
-        articulo.setAttributeNode(atributo);
-        documento.getDocumentElement().appendChild(articulo);
+        atributo.setValue(String.valueOf(this.pedidoID));
+        albaran.setAttributeNode(atributo);
+        documento.getDocumentElement().appendChild(albaran);
 
-        Element descripcion = documento.createElement("descripcion");
-        descripcion.setTextContent(this.descripcion);
-        articulo.appendChild(descripcion);
+        Element fechaPedido = documento.createElement("fechaAlbaran");
+        fechaPedido.setTextContent(this.fecha);
+        albaran.appendChild(fechaPedido);
 
-        Element precio = documento.createElement("precio");
-        precio.setTextContent(String.valueOf(this.precio));
-        articulo.appendChild(precio);
+        Element fechaEnvio = documento.createElement("fechaEnvio");
+        albaran.appendChild(fechaEnvio);
 
-        Element cantidad = documento.createElement("cantidad");
-        cantidad.setTextContent(String.valueOf(this.cantidad));
-        articulo.appendChild(cantidad);
+        Element fechaEntrega = documento.createElement("fechaEntrega");
+        albaran.appendChild(fechaEntrega);
 
-        Element descuento = documento.createElement("descuento");
-        descuento.setTextContent(String.valueOf(this.descuento));
-        articulo.appendChild(descuento);
+        Element formapagoID = documento.createElement("formapagoID");
+        albaran.appendChild(formapagoID);
+
+        Element transportistaID = documento.createElement("transportistaID");
+        albaran.appendChild(transportistaID);
+
+        Element partnerID = documento.createElement("partnerID");
+        partnerID.setTextContent(String.valueOf(this.partnerID));
+        albaran.appendChild(partnerID);
+
+        Element comercialID = documento.createElement("comercialID");
+        comercialID.setTextContent(String.valueOf(this.comercialID));
+        albaran.appendChild(comercialID);
+
+        Element lineas = documento.createElement("lineas");
+        albaran.appendChild(lineas);
+
+        for (Pedido pedido : this.pedidos){
+            Element linea = documento.createElement("linea");
+            lineas.appendChild(linea);
+
+            Element articuloID = documento.createElement("articuloID");
+            articuloID.setTextContent(pedido.getArticuloID());
+            linea.appendChild(articuloID);
+
+            Element precio = documento.createElement("precio");
+            precio.setTextContent(String.valueOf(pedido.getPrecio()));
+            linea.appendChild(precio);
+
+            Element cantidad = documento.createElement("cantidad");
+            cantidad.setTextContent(String.valueOf(pedido.getCantidad()));
+            linea.appendChild(cantidad);
+
+            Element descuento = documento.createElement("descuento");
+            descuento.setTextContent(String.valueOf(pedido.getDescuento()));
+            linea.appendChild(descuento);
+        }
 
     }
 
-    public ArrayList<Pedido> leerPedido(){
+    public ArrayList<Pedido> leerCatalogo(){
         String articuloId;
         String articuloDescripcion;
         float precio;
@@ -152,7 +202,7 @@ public class PedidoXML {
             TransformerFactory transFactory = TransformerFactory.newInstance();
             Transformer transformador = transFactory.newTransformer();
             Source source = new DOMSource(documento);
-            Result resultado  = new StreamResult(this.fichero);
+            Result resultado  = new StreamResult(this.ficheroPedido);
             transformador.setOutputProperty(OutputKeys.INDENT, "yes");
             transformador.transform(source, resultado);
 
