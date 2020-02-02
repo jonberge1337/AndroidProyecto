@@ -1,8 +1,10 @@
 package com.example.comercialesapp.ui.pedidos;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.comercialesapp.BuildConfig;
+import com.example.comercialesapp.R;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMImplementation;
@@ -14,6 +16,7 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,7 +35,8 @@ import javax.xml.transform.stream.StreamResult;
 
 public class PedidoXML {
     private Document documento;
-    private File fichero = new File("/storage/emulated/legacy/Download/Articulos.xml");
+//    private File fichero = new File("storage/emulated/legacy/Download/Articulos.xml");
+//    private File fichero = new File("/storage/emulated/0/Download/Articulos.xml");
 //    private File ficheroPedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedidos.xml");
     private String nombreFicheroPedido;
     private File ficheroPedido;
@@ -41,11 +45,12 @@ public class PedidoXML {
     private int comercialID;
     private int partnerID;
     private String fecha;
+    private Context contexto;
 
 
 
-    public PedidoXML(){
-
+    public PedidoXML(Context contexto){
+        this.contexto = contexto;
     }
 
     public PedidoXML(ArrayList<Pedido> pedidos, int comercialID, int partnerID, String fecha, int pedidoID){
@@ -63,8 +68,9 @@ public class PedidoXML {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
+            InputStream fIn = this.contexto.getResources().openRawResource(R.raw.articulos);
             builder = factory.newDocumentBuilder();
-            documento = builder.parse(this.fichero);
+            documento = builder.parse(fIn);
         } catch (ParserConfigurationException | SAXException | IOException e) { e.printStackTrace();
         }
     }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<articulos>
+  <articulo id="1">
+    <categoriaID>1</categoriaID>
+    <descripcion>KINETIC ENERGY +</descripcion>
+    <pr_vent>25</pr_vent>
+    <pr_cost>15</pr_cost>
+    <descuento>0</descuento>
+    <stock>400</stock>
+    <stock_min>200</stock_min>
+    <unidadID>2</unidadID>
+    <foto>kineticplus.jpg</foto>
+  </articulo>
+  <articulo id="2">
+    <categoriaID>1</categoriaID>
+    <descripcion>KINETIC ENERGY + ULTRA</descripcion>
+    <pr_vent>50</pr_vent>
+    <pr_cost>25</pr_cost>
+    <descuento>10</descuento>
+    <stock>175</stock>
+    <stock_min>90</stock_min>
+    <unidadID>2</unidadID>
+    <foto>kineticplusultra.jpg</foto>
+  </articulo>
+  <articulo id="3">
+    <categoriaID>2</categoriaID>
+    <descripcion>CARGADOR ECOLOGICO</descripcion>
+    <pr_vent>12</pr_vent>
+    <pr_cost>8</pr_cost>
+    <descuento>0</descuento>
+    <stock>800</stock>
+    <stock_min>300</stock_min>
+    <unidadID>2</unidadID>
+    <foto>cargador.jpg</foto>
+  </articulo>
+  <articulo id="4">
+    <categoriaID>3</categoriaID>
+    <descripcion>SILLA HIDRAULICA</descripcion>
+    <pr_vent>150</pr_vent>
+    <pr_cost>90</pr_cost>
+    <descuento>0</descuento>
+    <stock>100</stock>
+    <stock_min>50</stock_min>
+    <unidadID>1</unidadID>
+    <foto>silla.png</foto>
+  </articulo>
+</articulos>

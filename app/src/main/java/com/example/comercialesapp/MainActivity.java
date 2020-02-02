@@ -10,6 +10,7 @@ import com.example.comercialesapp.ui.pedidos.Pedido;
 import com.example.comercialesapp.ui.pedidos.PedidoXML;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.os.Environment;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -28,7 +29,10 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<Pedido> pedidos;
 
-        PedidoXML xml  = new PedidoXML();
+        PedidoXML xml  = new PedidoXML(this);
         xml.generarDOM();
         pedidos = xml.leerCatalogo();
 
@@ -112,35 +116,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void activarCorreo() {
-
-        File partners = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/articulos.xml");
-        File pedido = new File("/data/data/" + BuildConfig.APPLICATION_ID + "/pedido.xml");
-
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
-        if (partners.exists()) {
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(partners));
-        }
-        if (pedido.exists()) {
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pedido));
-        }
-
-            String[] TO = {"jseara@irakasleak.cebanc.com"}; //aquí pon tu correo
-            String[] CC = {""};
-            emailIntent.setData(Uri.parse("mailto:"));
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-            emailIntent.putExtra(Intent.EXTRA_CC, CC);
-            // Esto podrás modificarlo si quieres, el asunto y el cuerpo del mensaje
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto");
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "Escribe aquí tu mensaje");
-
-            try {
-                startActivity(Intent.createChooser(emailIntent, "Enviar email..."));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(getApplicationContext(),
-                        "No tienes clientes de email instalados.", Toast.LENGTH_SHORT).show();
-            }
-
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"delegacionChargenetic@gmail.com"});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Xml Partners");
+        startActivity(emailIntent);
     }
 
     public void vaciarTablaPedido(){

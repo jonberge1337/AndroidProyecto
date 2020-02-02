@@ -44,16 +44,10 @@ public class LoginActivity extends AppCompatActivity {
                         Cursor c;
                         c = db.rawQuery(consulta, null);
                         if (c.moveToFirst()){
-                            if(c.getInt(c.getColumnIndex("LOGUEADO")) == 1){
-                                Toast.makeText(getApplicationContext(), "YES", Toast.LENGTH_SHORT).show();
-                            }
                             db.execSQL("UPDATE COMERCIAL SET LOGUEADO = 1 WHERE CORREO = '" + usuario.getText().toString() + "'");
                             Intent intento = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intento);
                             db.close();
-//                            Log.e("prueba", "prueba");
-//                            Intent intento2 = new Intent(LoginActivity.this, LoginActivity.class);
-//                            startActivity(intento2);
                             finish();
                         } else {
                             Toast.makeText(getApplicationContext(), "No existe ese usuario con esa contraseña", Toast.LENGTH_SHORT).show();

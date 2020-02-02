@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import androidx.annotation.Nullable;
 import com.example.comercialesapp.R;
 import com.example.comercialesapp.TablaSQL;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class AdaptadorPedido extends ArrayAdapter {
@@ -74,10 +77,8 @@ public class AdaptadorPedido extends ArrayAdapter {
         holder.cantidad.setText(String.valueOf(pedido.getCantidad()));
         holder.precio.setText(String.valueOf(pedido.getPrecio()));
         holder.descuento.setText(String.valueOf(pedido.getDescuento()));
-        Resources resources = getContext().getResources();
-        holder.imagen.setImageResource(resources.getIdentifier(pedido.getImagen(), "drawable",
-                getContext().getPackageName()));
-
+        int resId = contexto.getResources().getIdentifier(pedido.getImagen().substring(0, pedido.getImagen().lastIndexOf('.')), "drawable", contexto.getPackageName());
+        holder.imagen.setImageResource(resId);
 
         if (!resumen){
             TablaSQL tabla = new TablaSQL(getContext(), "DBUsuarios", null, 1);
@@ -162,5 +163,15 @@ public class AdaptadorPedido extends ArrayAdapter {
 
         return item;
 
+    }
+    public static int getResId(String resName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

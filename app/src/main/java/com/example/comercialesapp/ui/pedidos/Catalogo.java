@@ -2,6 +2,7 @@ package com.example.comercialesapp.ui.pedidos;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class Catalogo extends Fragment implements View.OnClickListener {
         this.vista = root;
         final ArrayList<Pedido> pedidos;
 
-        PedidoXML xml  = new PedidoXML();
+        PedidoXML xml  = new PedidoXML(getContext());
         xml.generarDOM();
         pedidos = xml.leerCatalogo();
         imagenes = new int[pedidos.size()];
@@ -49,6 +50,9 @@ public class Catalogo extends Fragment implements View.OnClickListener {
             int resourceId = resources.getIdentifier(pedidos.get(i).getImagen(), "drawable",
                     getContext().getPackageName());
             imagenes[i] = resourceId;
+        }
+        for (Pedido pedido : pedidos){
+            Log.e("imagen", pedido.getImagen());
         }
         AdaptadorPedido adaptador = new AdaptadorPedido(getActivity(), pedidos, false);
         listaPedidos = root.findViewById(R.id.lstArticulos);

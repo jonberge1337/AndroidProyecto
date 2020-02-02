@@ -27,28 +27,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
-                    <LinearLayout
-                        android:id="@+id/layoutClienteIDNuevo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/lblIDNuevo"
-                            android:layout_width="0px"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/id_cliente" />
-
-                        <EditText
-                            android:id="@+id/txtIDNuevo"
-                            android:layout_width="0px"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.5"
-                            android:ems="10"
-                            android:inputType="number" />
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/layoutEmpresaNuevo"
